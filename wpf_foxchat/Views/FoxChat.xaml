@@ -1,0 +1,727 @@
+﻿<Window x:Class="wpf_foxchat.FoxChat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_foxchat"
+        xmlns:ctrl ="clr-namespace:wpf_foxchat.Controls"
+        mc:Ignorable="d"
+        MinWidth="600" MinHeight="620"
+        Width="1150"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource FoxChatWin}">
+    <Window.Resources>
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToolTip}">
+                        <Border Name="Border"
+                                BorderBrush="DarkGray"
+                                BorderThickness="1"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                CornerRadius="4">
+                            <Border.Background>
+                                <LinearGradientBrush  StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="Snow" Offset="0.0"/>
+                                    <GradientStop Color="Gainsboro" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        </Style>
+    </Window.Resources>
+    <Border Background="#242423" CornerRadius="10" Margin="4">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="26"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- ====================================== Title Bar ====================================== -->
+            <Grid x:Name="TitleBar" Grid.Row="0"
+                Background="Transparent" 
+                HorizontalAlignment="Stretch"
+                MouseDown="TitleBar_MouseDown"
+                MouseMove="TitleBar_MouseMove"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Label Margin="10,0,0,0" Content="FoxChat" VerticalAlignment="Center" >
+                </Label>
+                <StackPanel Background="Transparent"
+                        Orientation="Horizontal"
+                        FlowDirection="RightToLeft">
+                    <ctrl:FButton Width="30"
+                               Content="🗙"
+                               BorderThickness="0"
+                               Background="Transparent" 
+                               BorderRadius="10,0,0,0"
+                               BorderBrush="Violet"
+                               Click="ButtonClose_Click">
+                    </ctrl:FButton>
+                    <ctrl:FButton Width="30"
+                               Content="🗖"
+                               BorderThickness="0"
+                               Background="Transparent" 
+                               BorderRadius="0"
+                               BorderBrush="Violet"
+                               Click="ButtonMaximize_Click">
+                    </ctrl:FButton>
+                    <ctrl:FButton Width="30"
+                               Content="🗕"
+                               BorderThickness="0"
+                               Background="Transparent" 
+                               BorderRadius="0"
+                               BorderBrush="Violet"
+                               Click="ButtonMinimize_Click">
+                    </ctrl:FButton>
+                </StackPanel>
+            </Grid>
+            <!-- ======================================  Body ====================================== -->
+            <Grid x:Name="Body" Grid.Row="1" Margin="0" Background="#35393D">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                    <!--<ColumnDefinition Width="300"/>-->
+                </Grid.ColumnDefinitions>
+                <!--Navigation left-->
+                <Grid Grid.Row="0" Grid.Column="0" Background="#2E3033">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="26"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Header navigation-->
+                    <Grid Grid.Row="0" Grid.Column="0" Background="Transparent"
+                          Margin="4">
+                        <Label x:Name="usename"
+                               Content="DesertFox"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center">
+                        </Label>
+                        <Button FlowDirection="RightToLeft" 
+                                BorderThickness="0"
+                                Style="{StaticResource ButtonChangeHover}"
+                                Background="Transparent"
+                                Width="20" 
+                                Height="15"
+                                Content="&#xf03a;"
+                                HorizontalAlignment="Right">
+                        </Button>
+                    </Grid>
+
+                    <!--Box search--> 
+                    <Border Grid.Row="1" Grid.Column="0" Background="#424144" 
+                             HorizontalAlignment="Stretch"
+                             BorderThickness="0"
+                             Margin="4" 
+                             CornerRadius="5">
+                        <Grid Background="Transparent"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Margin="0"
+                                   Content="&#xf002;"
+                                   HorizontalAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   FontFamily="{StaticResource FontAwesome}">
+                            </Label>
+                            <TextBox x:Name="SearchQuery"
+                                     Grid.Column="1"
+                                     Margin="2"
+                                     BorderThickness="0"
+                                     Text="Search text"
+                                     Background="Transparent"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalContentAlignment="Center">
+                            </TextBox>
+                        </Grid>
+                    </Border>
+
+                    <!--Contact card-->
+                    <Grid Grid.Row="2" Grid.Column="0" Background="Transparent">
+                        <ScrollViewer Style="{StaticResource CScrollViewer}">
+                            <StackPanel>
+                                <Border x:Name="xUser"
+                                    CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi dau tien" 
+                                                   HorizontalAlignment="Left"
+                                                   VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                        <!--Thông tin tổng quát-->
+                                        <Popup Placement="Right"
+                                               HorizontalOffset="-10"
+                                               VerticalOffset  ="-10"
+                                               AllowsTransparency="True">
+                                            <Popup.Style>
+                                                <!--Sự kiện khi hover vào tag và popup-->
+                                                <Style TargetType="{x:Type Popup}">
+                                                    <Setter Property="IsOpen" Value="False"/>
+                                                    <Style.Triggers>
+                                                        <!--Hover vào Item tên-->
+                                                        <DataTrigger Binding="{Binding Path=IsMouseOver,
+                                                                     RelativeSource={RelativeSource
+                                                                     AncestorType={x:Type Border}}}"
+                                                                     Value="True">
+                                                            <Setter Property="IsOpen" Value="True"></Setter>
+                                                        </DataTrigger>
+                                                        <!--Hover vào popup profile-->
+                                                        <Trigger Property="IsMouseOver"  Value="True">
+                                                            <Setter Property="IsOpen" Value="True"></Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Popup.Style>
+                                            <ctrl:CProfile/>
+                                        </Popup>
+                                    </Grid>
+
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                     Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                        <!--Thông tin tổng quát-->
+                                        <Popup Placement="Right"
+                                               HorizontalOffset="-10"
+                                               VerticalOffset  ="-10"
+                                               AllowsTransparency="True">
+                                            <Popup.Style>
+                                                <!--Sự kiện khi hover vào tag và popup-->
+                                                <Style TargetType="{x:Type Popup}">
+                                                    <Setter Property="IsOpen" Value="False"/>
+                                                    <Style.Triggers>
+                                                        <!--Hover vào Item tên-->
+                                                        <DataTrigger Binding="{Binding Path=IsMouseOver,
+                                                                     RelativeSource={RelativeSource
+                                                                     AncestorType={x:Type Border}}}"
+                                                                     Value="True">
+                                                            <Setter Property="IsOpen" Value="True"></Setter>
+                                                            <Setter Property="PopupAnimation" Value="None"></Setter>
+                                                        </DataTrigger>
+                                                        <!--Hover vào popup profile-->
+                                                        <Trigger Property="IsMouseOver"  Value="True">
+                                                            <Setter Property="IsOpen" Value="True"></Setter>
+                                                            <Setter Property="PopupAnimation" Value="None"></Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Popup.Style>
+                                            <ctrl:CProfile/>
+                                        </Popup>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu hai" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                <Border CornerRadius="10" 
+                                    Height="50"
+                                    Background="#393B3E"
+                                    Margin="4,2,4,2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Ellipse Grid.Column="0"
+                                             Width="40" Margin="5">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/face-user.png"
+                                                        Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Label Content="Nguoi thu cuoi==" 
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center">
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <!--Footer navigation-->
+                    <Grid Grid.Row="3" Grid.Column="0">
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                            <ctrl:FButton Width="100" 
+                                  Margin="2,0,0,0"
+                                  Content="OK"
+                                  BorderThickness="0"
+                                  BorderRadius="4">
+                            </ctrl:FButton>
+                            <ctrl:FButton Width="100" 
+                                  Margin="2,0,0,0"
+                                  Content="Cancel"
+                                  BorderThickness="0"
+                                  BorderRadius="4">
+                            </ctrl:FButton>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <!--Chat-->
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <DockPanel LastChildFill="True" Margin="5" Background="WhiteSmoke">
+                        <!--Chat bar-->
+                        <Grid  Height="35"
+                               DockPanel.Dock="Bottom" 
+                               VerticalAlignment="Stretch" 
+                               HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="70"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Cụm này hiển thị thanh chat message-->
+
+                            <TextBlock x:Name="LabelPlaceHolderMessage" 
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Padding="10"
+                                   Text="Write a message..."
+                                   Background="Bisque">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=TextBoxMessage,Path=Text}" Value="">
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBox Name="TextBoxMessage" 
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     BorderThickness="0"
+                                     Margin="-3,0,0,0"
+                                     Padding="10"
+                                     Background="Transparent"
+                                     HorizontalAlignment="Stretch"
+                                     Foreground="Black"
+                                     VerticalAlignment="Stretch"
+                                     VerticalContentAlignment="Center">
+                            </TextBox>
+
+                            <Button Grid.Column="1" 
+                                    Style="{StaticResource ButtonChangeHover}"
+                                    Height="15"
+                                    Width ="18"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    Content="&#xf0c1;">
+                            </Button>
+                            <ctrl:FButton Grid.Column="2"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Content="&#xf1d8;"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+                            </ctrl:FButton>
+                        </Grid>
+                        <!--Chanel Title Bar-->
+                        <Grid x:Name="TitleBarChat"
+                              Height="40"
+                              DockPanel.Dock="Top"
+                              Background="AntiqueWhite">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Label Content="Đây là kênh chat"
+                                       Margin="5"
+                                       HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch"
+                                       VerticalContentAlignment="Center">
+                                </Label>
+                            </Grid>
+                        </Grid>
+                        <!--Content chat chanel-->
+                        <Grid  Background="Transparent" HorizontalAlignment="Stretch" Margin="0,0,5,0">
+                           <ctrl:CConversation  BorderThickness="0"></ctrl:CConversation>
+                        </Grid>
+                    </DockPanel>
+                </Grid>
+                <!--Navigation right--><!--
+                <Grid Grid.Row="0" Grid.Column="2">
+                    <ctrl:CProfileInfo Margin="0"></ctrl:CProfileInfo>
+                </Grid>-->
+            </Grid>
+            <!-- ======================================  Footer ====================================== -->
+            <Grid x:Name="Footer" Grid.Row="2" Margin="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal"
+                            Margin="4"
+                            FlowDirection="RightToLeft">
+                    <TextBlock Text="Copyright wpf-foxchat @2022"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch">
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

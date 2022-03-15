@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:wpf_foxchat.Themes">
+    <SolidColorBrush  x:Key="TextColorSent">#F7F9FF</SolidColorBrush>
+    <SolidColorBrush  x:Key="TextColorReceive">#050505</SolidColorBrush>
+
+    <SolidColorBrush  x:Key="MesseageColorSent">#259BFF</SolidColorBrush>
+    <SolidColorBrush  x:Key="MesseageColorReceive">#FFE4E6EB</SolidColorBrush>
+
+    <!--Message Style-->
+    <Style x:Key="CMessageStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="{StaticResource TextColorReceive}"/>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding MessageStatus}" Value="Sent">
+                <Setter Property="Foreground" Value="{StaticResource TextColorSent}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

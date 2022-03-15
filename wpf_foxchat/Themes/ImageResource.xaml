@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:wpf_foxchat.Themes">
+    <!--Hình ảnh Reaction statistical-->
+    <ImageSource x:Key="Like_React_Source">pack://application:,,,/Assets/react/like.png</ImageSource>
+    <ImageSource x:Key="Haha_React_Source">pack://application:,,,/Assets/react/haha.png</ImageSource>
+    <ImageSource x:Key="Love_React_Source">pack://application:,,,/Assets/react/love.png</ImageSource>
+    <ImageSource x:Key ="Wow_React_Source">pack://application:,,,/Assets/react/wow.png </ImageSource>
+    <ImageSource x:Key ="Sad_React_Source">pack://application:,,,/Assets/react/Sad.png </ImageSource>
+
+    <!--Hình ảnh Reaction-->
+    <ImageBrush x:Key="Like_React" ImageSource="/Assets/react/like.png" Stretch="Uniform"/>
+    <ImageBrush x:Key="Haha_React" ImageSource="/Assets/react/haha.png" Stretch="Uniform"/>
+    <ImageBrush x:Key="Love_React" ImageSource="/Assets/react/love.png" Stretch="Uniform"/>
+    <ImageBrush x:Key="Wow_React"  ImageSource="/Assets/react/wow.png"  Stretch="Uniform"/>
+    <ImageBrush x:Key="Sad_React"  ImageSource="/Assets/react/Sad.png"  Stretch="Uniform"/>
+
+</ResourceDictionary>

@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="wpf_foxchat.Controls.CReaction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpf_foxchat.Controls"
+             mc:Ignorable="d" 
+             Height="50" Width="230">
+    <UserControl.Resources>
+        <!--===============================  Giao diện Icon Reaction ===============================-->
+        <Style x:Key="IconReact" TargetType="{x:Type Button}">
+            <Setter Property="Width"            Value="35"/>
+            <Setter Property="BorderThickness"  Value="0"/>
+            <Setter Property="Margin"           Value="2"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect  ShadowDepth="0" BlurRadius="10"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter Name="content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              Margin="{TemplateBinding Padding}" 
+                                              RecognizesAccessKey="True" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Margin" Value="-9"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                                            <GradientStop Color="LightGray" Offset="0.35"/>
+                                            <GradientStop Color="Gray" Offset="0.95"/>
+                                            <GradientStop Color="LightGray" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="6">
+        <Border CornerRadius="20"
+                BorderThickness="1"
+                BorderBrush="Wheat"
+                Background="Transparent">
+            <Grid>
+                <Grid Margin="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="React_Like"
+                            Click="Btn_React_Click"
+                            Grid.Column="0"
+                            Style="{StaticResource IconReact}" 
+                            Background="{StaticResource Like_React}">
+                    </Button>
+                    <Button x:Name="React_Haha" 
+                            Click="Btn_React_Click"
+                            Grid.Column="1"
+                            Style="{StaticResource IconReact}"
+                            Background="{StaticResource Haha_React}">
+                    </Button>
+                    <Button x:Name="React_Love" 
+                            Click="Btn_React_Click"
+                            Grid.Column="2"
+                            Style="{StaticResource IconReact}"
+                            Background="{StaticResource Love_React}">
+                    </Button>
+                    <Button x:Name="React_Wow" 
+                            Click="Btn_React_Click"
+                            Grid.Column="3"
+                            Style="{StaticResource IconReact}"
+                            Background="{StaticResource Wow_React}">
+                    </Button>
+                    <Button x:Name="React_Sad" 
+                            Click="Btn_React_Click"
+                            Grid.Column="4"
+                            Style="{StaticResource IconReact}"
+                            Background="{StaticResource Sad_React}">
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

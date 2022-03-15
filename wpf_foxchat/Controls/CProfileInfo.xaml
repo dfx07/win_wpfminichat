@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="wpf_foxchat.Controls.CProfileInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpf_foxchat.Controls"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--Phần hiển thị hình ảnh-->
+            <Ellipse Grid.Row="0" Grid.Column="1" 
+                         Width="Auto"
+                         Margin="3">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Assets/face-user.png"
+                                Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"></RowDefinition>
+                <RowDefinition Height="28"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                   Content="Họ và tên"
+                   HorizontalAlignment="Stretch"
+                   HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Center">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="1" 
+                     Style="{StaticResource InputBaseStyle}" 
+                     Margin="2"
+                     Tag="Please write something here!">
+            </TextBox>
+
+            <Label Grid.Row="1" Grid.Column="0"
+                   Content="Địa chỉ"
+                   HorizontalAlignment="Stretch"
+                   HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Center">
+            </Label>
+            <TextBox Grid.Row="1" Grid.Column="1" 
+                     Style="{StaticResource InputBaseStyle}" 
+                     Margin="2"
+                     Tag="Please write something here!">
+            </TextBox>
+        </Grid>
+       
+    </Grid>
+</UserControl>

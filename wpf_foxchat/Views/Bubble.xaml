@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="wpf_foxchat.Views.Bubble"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpf_foxchat.Views"
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto" Background="WhiteSmoke">
+    <UserControl.Resources>
+        <ImageSource x:Key="Like_React_Source">pack://application:,,,/Assets/react/like.png</ImageSource>
+        <ImageSource x:Key="Haha_React_Source">pack://application:,,,/Assets/react/haha.png</ImageSource>
+        <ImageSource x:Key="Love_React_Source">pack://application:,,,/Assets/react/love.png</ImageSource>
+        <ImageSource x:Key ="Wow_React_Source">pack://application:,,,/Assets/react/wow.png</ImageSource>
+        <ImageSource x:Key ="Sad_React_Source">pack://application:,,,/Assets/react/Sad.png</ImageSource>
+
+
+        <Style x:Key="BorderReactionStatisticalStyle" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius"         Value="7"/>
+            <Setter Property="Margin"               Value="2,0,0,0"/>
+            <Setter Property="Padding"              Value="2,0,2,0"/>
+            <Setter Property="Background"           Value="Aquamarine"/>
+        </Style>
+
+        <Style x:Key="TextReactionStatisticalStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment"  Value="Center"/>
+            <Setter Property="VerticalAlignment"    Value="Center"/>
+            <Setter Property="FontSize"             Value="9"/>
+            <Setter Property="Padding"              Value="2,0,2,0"/>
+            <Setter Property="Foreground"           Value="Black"/>
+        </Style>
+
+        <!--Thiết kế giao diện cho reaction review-->
+        <Style x:Key="ItemReactionStatisticalStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+
+                        <Border Style="{StaticResource BorderReactionStatisticalStyle}" >
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="5"></DropShadowEffect>
+                            </Border.Effect>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Width="10" Source="{StaticResource Like_React_Source}">
+                                </Image>
+                                <TextBlock Grid.Column="1"
+                                           Style="{StaticResource TextReactionStatisticalStyle}"
+                                           Text="12">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ReactionStatisticalStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <StackPanel Orientation="Horizontal"
+                                    FlowDirection="LeftToRight"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="0,0,10,0">
+                            <ListBoxItem Style="{StaticResource ItemReactionStatisticalStyle}"></ListBoxItem>
+                            <ListBoxItem Style="{StaticResource ItemReactionStatisticalStyle}"></ListBoxItem>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <Grid Width="40" >
+            <Ellipse Height="40" >
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Assets/face_webu.jpg"
+                                Stretch="Uniform"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="14"/>
+            </Grid.RowDefinitions>
+            <!--Phần đuôi hiển thị-->
+            <Grid x:Name="MsgTail"
+              Grid.Row="0" Grid.Column="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+                <Path Data="M13,0.1875C5.925781,0.1875 0.1875,5.253906 0.1875,11.5 0.1875,14.675781 1.675781,17.539063 4.0625,19.59375 
+                  3.542969,22.601563 0.175781,23.828125 0.40625,24.65625 3.414063,25.902344 9.378906,23.011719 10.28125,22.5625 11.15625,
+                  22.730469 12.070313,22.8125 13,22.8125 20.074219,22.8125 25.8125,17.746094 25.8125,11.5 25.8125,5.253906 20.074219,0.1875 13,0.1875z"
+                  VerticalAlignment="Bottom"
+                  RenderTransformOrigin="0.5,0.5"
+                  Height="54.75" MinHeight="50"
+                  Width="58" MinWidth="58"
+                  Stretch="Uniform">
+                    <Path.Style>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="Fill" Value="{StaticResource MesseageColorReceive}"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MessageStatus}" Value="Sent">
+                                    <Setter Property="Fill" Value="{StaticResource MesseageColorSent}"/>
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="-1"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
+                </Path>
+            </Grid>
+
+            <!--Nội dung thông điệp-->
+            <Border x:Name="MsgContent" 
+                Grid.Row="0" Grid.Column="0"
+                CornerRadius="30"
+                MinHeight="60" 
+                MinWidth="200"
+                MaxWidth="500">
+
+                <!--Điều chỉnh màu nền trùng với trạng thái-->
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Background" Value="{StaticResource MesseageColorReceive}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MessageStatus}" Value="Sent">
+                                <Setter Property="Background" Value="{StaticResource MesseageColorSent}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <TextBlock Style="{StaticResource CMessageStyle}"
+                       Text="This is chat chit tại việt nam đây">
+                </TextBlock>
+            </Border>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <DockPanel LastChildFill="True"
+                       FlowDirection="RightToLeft"
+                       HorizontalAlignment="Stretch">
+                    <TextBlock DockPanel.Dock="Left" 
+                           
+                               FontSize="10px"
+                               Padding="0,0,20,0" 
+                               Foreground="Gray"
+                               Text="7:00px">
+                    </TextBlock>
+                    <StackPanel Margin="0,0,0,0" 
+                            VerticalAlignment="Center">
+                        <ListBox Margin="0,-10,0,0" Style="{StaticResource ReactionStatisticalStyle}"></ListBox>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+        </Grid>
+
+    </StackPanel>
+
+</UserControl>
