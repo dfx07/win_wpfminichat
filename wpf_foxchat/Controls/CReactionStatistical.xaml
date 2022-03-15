@@ -81,7 +81,10 @@
             <Setter Property="ItemsPanel">
                 <Setter.Value>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Horizontal" 
+                                    MaxHeight="14" 
+                                    VerticalAlignment="Top">
+                        </StackPanel>
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>

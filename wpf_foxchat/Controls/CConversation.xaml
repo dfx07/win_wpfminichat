@@ -11,7 +11,8 @@
         <Style x:Key="MessageTimeStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground"          Value="Gray"/>
             <Setter Property="FontSize"            Value="10px"/>
-            <Setter Property="Padding"             Value="15,0,15,0"/>
+            <Setter Property="Margin"              Value="15,0,15,0"/>
+            <Setter Property="VerticalAlignment"   Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <!--Thời gian sẽ căn gần lề-->
             <Style.Triggers>
@@ -137,7 +138,7 @@
                                                     <Setter Property="Fill" Value="{StaticResource MesseageColorReceive}"/>
                                                     <Setter Property="HorizontalAlignment" Value="Left"/>
                                                     <Style.Triggers>
-                                                        <!--Không hiển thị ra cái đuôi--> 
+                                                        <!--Không hiển thị ra cái đuôi-->
                                                         <DataTrigger Binding="{Binding Path=ShowImageUserMessage}" Value="False">
                                                             <Setter Property="Visibility" Value="Collapsed" />
                                                         </DataTrigger>
@@ -244,7 +245,7 @@
                                     <!--Thông tin về thời gian trạng thái-->
                                     <Grid Grid.Row="1" Grid.Column="0">
                                         <DockPanel LastChildFill="True"
-                                               HorizontalAlignment="Stretch">
+                                                   HorizontalAlignment="Stretch">
                                             <DockPanel.Style>
                                                 <Style TargetType="{x:Type DockPanel}">
                                                     <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -259,8 +260,7 @@
                                                        Text="{Binding MessageTime}">
                                             </TextBlock>
                                             <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Stretch"
-                                                    Margin="0,0,60,0">
+                                                        Margin="0,0,60,0">
                                                 <StackPanel.Style>
                                                     <Style TargetType="{x:Type StackPanel}">
                                                         <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -279,7 +279,6 @@
                                     </Grid>
                                 </Grid>
                             </StackPanel>
-                            
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

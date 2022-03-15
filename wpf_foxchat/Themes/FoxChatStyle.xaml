@@ -10,4 +10,6 @@
         <Setter Property="Foreground"           Value="Gray"/>
         <Setter Property="Background"           Value="Transparent"/>
     </Style>
+
+    <SolidColorBrush  x:Key="TitleBarColor">#242423</SolidColorBrush>
 </ResourceDictionary>

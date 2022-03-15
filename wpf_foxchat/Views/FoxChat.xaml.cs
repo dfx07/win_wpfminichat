@@ -72,26 +72,26 @@ namespace wpf_foxchat
 
         private void TitleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed )
-            {
-                double percentHorizontal = e.GetPosition(this).X / ActualWidth;
-                double targetHorizontal = RestoreBounds.Width * percentHorizontal;
+            //if (e.LeftButton == MouseButtonState.Pressed )
+            //{
+            //    double percentHorizontal = e.GetPosition(this).X / ActualWidth;
+            //    double targetHorizontal = RestoreBounds.Width * percentHorizontal;
 
-                double percentVertical = e.GetPosition(this).Y / ActualHeight;
-                double targetVertical = RestoreBounds.Height * percentVertical;
+            //    double percentVertical = e.GetPosition(this).Y / ActualHeight;
+            //    double targetVertical = RestoreBounds.Height * percentVertical;
 
-                Left = e.GetPosition(null).X - targetHorizontal;
-                Top = e.GetPosition(null).Y - targetVertical;
+            //    Left = e.GetPosition(null).X - targetHorizontal;
+            //    Top = e.GetPosition(null).Y - targetVertical;
 
-                WindowState = WindowState.Normal;
-                DragMove();
-            }
+            //    WindowState = WindowState.Normal;
+            //    DragMove();
+            //}
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
-                this.Maximize();
+            //if (e.ClickCount == 2)
+            //    this.Maximize();
         }
     }
 }
