@@ -28,5 +28,8 @@ namespace wpf_foxchat.Controls
         //    var parentT = parent as T;
         //    return parentT ?? FindChidren<T>(parent);
         //}
+
+
+        //  Test
     }
 }
