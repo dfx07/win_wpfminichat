@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CProfileInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,11 +79,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\CButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\CMessageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ControlBidding.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,7 +127,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FoxChat.xaml">
+    <Page Include="Views\MainChat.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -119,9 +135,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\MainViewController.cs" />
     <Compile Include="Controls\CConversation.xaml.cs">
       <DependentUpon>CConversation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CMessageBox.xaml.cs">
+      <DependentUpon>CMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Com\CButton.cs" />
+    <Compile Include="Controls\Com\PControl.cs" />
+    <Compile Include="ViewModels\BaseControl.cs" />
     <Compile Include="Controls\CProfileInfo.xaml.cs">
       <DependentUpon>CProfileInfo.xaml</DependentUpon>
     </Compile>
@@ -134,15 +157,20 @@
     <Compile Include="Controls\CReactionStatistical.xaml.cs">
       <DependentUpon>CReactionStatistical.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FButton.cs" />
+    <Compile Include="Controls\CWindow.xaml.cs">
+      <DependentUpon>CWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Messages.cs" />
-    <Compile Include="Controls\Utils.cs" />
+    <Compile Include="Controls\Com\Utils.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MessageBoxViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="Views\Bubble.xaml.cs">
       <DependentUpon>Bubble.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FoxChat.xaml.cs">
-      <DependentUpon>FoxChat.xaml</DependentUpon>
+    <Compile Include="Views\MainChat.xaml.cs">
+      <DependentUpon>MainChat.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -187,9 +215,15 @@
     <Resource Include="Assets\react\sad.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\uialert\uialert_error.png" />
+    <Resource Include="Assets\uialert\uialert_info.png" />
+    <Resource Include="Assets\uialert\uialert_question.png" />
+    <Resource Include="Assets\uialert\uialert_success.png" />
+    <Resource Include="Assets\uialert\uialert_warning.png" />
     <Resource Include="Assets\face_webu.jpg" />
     <Content Include="Assets\react\sad.svg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

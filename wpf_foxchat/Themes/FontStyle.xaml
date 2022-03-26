@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:wpf_foxchat.Themes">
     <!--Font family use application-->
     <FontFamily x:Key="FontAwesome">/Fonts/FontAwesome.ttf#Font Awesome 6 Free Solid</FontFamily>
-
+    <FontFamily x:Key="FontRobotoMono">RobotoMono</FontFamily>
     <!--Define color text-->
     <SolidColorBrush  x:Key="TextColor">#777879</SolidColorBrush>
 

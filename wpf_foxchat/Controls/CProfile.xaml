@@ -53,7 +53,7 @@
                          Width="Auto"
                          Margin="3">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Assets/face-user.png"
+                            <ImageBrush ImageSource="{StaticResource Face_default_source}"
                                     Stretch="UniformToFill"/>
                         </Ellipse.Fill>
                     </Ellipse>

@@ -8,11 +8,22 @@
     <ImageSource x:Key ="Wow_React_Source">pack://application:,,,/Assets/react/wow.png </ImageSource>
     <ImageSource x:Key ="Sad_React_Source">pack://application:,,,/Assets/react/Sad.png </ImageSource>
 
+    <!--Hình ảnh Message box-->
+    <ImageSource x:Key="Erro_Alert_Source">pack://application:,,,/Assets/uialert/uialert_error.png</ImageSource>
+    <ImageSource x:Key="Info_Alert_Source">pack://application:,,,/Assets/uialert/uialert_info.png</ImageSource>
+    <ImageSource x:Key="Ques_Alert_Source">pack://application:,,,/Assets/uialert/uialert_question.png</ImageSource>
+    <ImageSource x:Key="Succ_Alert_Source">pack://application:,,,/Assets/uialert/uialert_success.png</ImageSource>
+    <ImageSource x:Key="Warn_Alert_Source">pack://application:,,,/Assets/uialert/uialert_warning.png</ImageSource>
+
+    <ImageSource x:Key="Face_default_source">pack://application:,,,/Assets/face-user.png</ImageSource>
+
     <!--Hình ảnh Reaction-->
     <ImageBrush x:Key="Like_React" ImageSource="/Assets/react/like.png" Stretch="Uniform"/>
     <ImageBrush x:Key="Haha_React" ImageSource="/Assets/react/haha.png" Stretch="Uniform"/>
     <ImageBrush x:Key="Love_React" ImageSource="/Assets/react/love.png" Stretch="Uniform"/>
     <ImageBrush x:Key="Wow_React"  ImageSource="/Assets/react/wow.png"  Stretch="Uniform"/>
     <ImageBrush x:Key="Sad_React"  ImageSource="/Assets/react/Sad.png"  Stretch="Uniform"/>
+    <ImageBrush x:Key="Navi_left"  ImageSource="/Assets/navi_left.png"  Stretch="Fill"/>
+    <ImageBrush x:Key="Content_Chat"  ImageSource="/Assets/content_chat.png"  Stretch="Fill"/>
 
 </ResourceDictionary>

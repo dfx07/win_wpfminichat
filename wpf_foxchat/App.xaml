@@ -2,15 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:wpf_foxchat"
-             StartupUri="Views\FoxChat.xaml">
+             xmlns:mv   ="clr-namespace:wpf_foxchat.ViewModels"
+             xmlns:v    ="clr-namespace:wpf_foxchat.Views"
+             xmlns:ctrl ="clr-namespace:wpf_foxchat.Controls"
+             Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
-            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/FontStyle.xaml"   />
                 <ResourceDictionary Source="Themes/CScrollBarStyle.xaml"  />
                 <ResourceDictionary Source="Themes/FoxChatStyle.xaml"/>
+                <ResourceDictionary Source="Themes/CAnimation.xaml"/>
                 <ResourceDictionary Source="Themes/CButtonStyle.xaml"/>
+                <ResourceDictionary Source="Themes/ControlBidding.xaml"/>
                 <ResourceDictionary Source="Themes/CMessageStyle.xaml"/>
                 <ResourceDictionary Source="Themes/ImageResource.xaml"/>
                 <ResourceDictionary Source="Themes/InputStyle.xaml"/>

@@ -10,18 +10,17 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpf_foxchat.Controls;
 
 namespace wpf_foxchat
 {
-    /// <summary>
-    /// Interaction logic for FoxChat.xaml
-    /// </summary>
-    public partial class FoxChat : Window
+    public partial class MainChat : Window
     {
-        public FoxChat()
+        public MainChat()
         {
             InitializeComponent();
         }
@@ -88,10 +87,46 @@ namespace wpf_foxchat
             //}
         }
 
+        private void SetDstImage(RenderTargetBitmap bitmap)//,Size size)
+        {
+            var ib = new ImageBrush(bitmap);
+            ib.Stretch = Stretch.Fill;
+
+            xGrid_NavigationLeft.Background = ib;
+        }
+
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //if (e.ClickCount == 2)
             //    this.Maximize();
+        }
+
+        private void ChangeMininavigation(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Grid ic = sender as Grid;
+            RenderTargetBitmap bitmap = Utils.RenderToBitmap(ic);
+
+            SetDstImage(bitmap);
+        }
+
+        private void BTN_MininaviClick(object sender, RoutedEventArgs e)
+        {
+            xGird_Naviheader.Visibility  = Visibility.Hidden;
+            xGrid_Navisearch.Visibility  = Visibility.Hidden;
+            xGrid_Navicontact.Visibility = Visibility.Hidden;
+            xGrid_Navifooter.Visibility  = Visibility.Hidden;
+
+            xGrid_Contentchat.Visibility = Visibility.Hidden;
+        }
+
+        private void xGrid_NavigationLeftMini_End(object sender, EventArgs e)
+        {
+            xGird_Naviheader.Visibility  = Visibility.Visible;
+            xGrid_Navisearch.Visibility  = Visibility.Visible;
+            xGrid_Navicontact.Visibility = Visibility.Visible;
+            xGrid_Navifooter.Visibility  = Visibility.Visible;
+
+            xGrid_Contentchat.Visibility = Visibility.Visible;
         }
     }
 }

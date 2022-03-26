@@ -295,7 +295,34 @@
                 <!--Khi muốn sửa dụng ScrollViewer và ListBox-->
                 <ScrollViewer Style="{StaticResource CScrollViewer}"
                               Margin="0,0,-6,0">
-                    <ItemsPresenter/>
+                    <StackPanel>
+                        <Border HorizontalAlignment="Stretch"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="#ECECEC"
+                                Height="20">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <!--Khi di chuyển vào sẽ đổi màu-->
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Margin"     Value="2,0,2,0"/>
+                                            <Setter Property="Background" Value="#FFECECEC"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <TextBlock Style="{StaticResource LinkStyle}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Text="Loading more...">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding SomeCommand}" MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
+                        </Border>
+                        <ItemsPresenter/>
+                    </StackPanel>
                 </ScrollViewer>
             </ControlTemplate>
         </ListBox.Template>

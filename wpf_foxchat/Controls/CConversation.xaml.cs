@@ -26,8 +26,6 @@ namespace wpf_foxchat.Controls
         public CConversation()
         {
             InitializeComponent();
-
-            DataContext = new MainViewModel();
         }
 
         private void POPUP_React_MouseLeave(object sender, MouseEventArgs e)
