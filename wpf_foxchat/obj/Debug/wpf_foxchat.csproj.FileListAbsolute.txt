@@ -77,3 +77,4 @@ G:\win_wpfminichat\wpf_foxchat\obj\Debug\Views\MainChat.baml
 G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.g.resources
 G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.Properties.Resources.resources
 G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.csproj.GenerateResource.Cache
+G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.csprojResolveAssemblyReference.cache

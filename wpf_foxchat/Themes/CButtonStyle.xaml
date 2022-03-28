@@ -154,7 +154,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--===============================  Giao diện của control CButton ===============================-->
+    <!--===============================  Giao diện của Control CButton ===============================-->
 
     <Style TargetType="{x:Type ctrl:CButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background"      Value="LightSalmon"/>
@@ -204,6 +204,95 @@
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Foreground" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--===============================  Giao diện của control CButton ===============================-->
+    <Style x:Key="BTN_FunctionStyle" TargetType="{x:Type ctrl:CButton}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop x:Name="GRAID_0" Offset="0" Color="{Binding GradientStartColor, RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}}" />
+                        <GradientStop x:Name="GRAID_1" Offset="1" Color="{Binding GradientEndColor, RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}}" />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground"      Value="Black"/>
+        <Setter Property="Opacity"         Value="1"/>
+        <Setter Property="BorderRadius"    Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:CButton}">
+                    <Border x:Name="BOR_CButtonFun"
+                            CornerRadius="{TemplateBinding BorderRadius}"
+                            Opacity="{TemplateBinding Opacity}"
+                            Visibility="{TemplateBinding Visibility}"
+                            IsEnabled="{TemplateBinding IsEnabled}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          TextBlock.FontSize="{TemplateBinding FontSize}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        </ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BOR_CButtonFun" Property="BorderBrush" Value="#CC0000"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <!--<Setter Property="BorderThickness"  Value="0"/>-->
+                <!--<Setter Property="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}}" Value="0"/>-->
+                <!--<Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            --><!--Không thể bidding hoặc thay màu static vào đây được--><!--
+                            <ColorAnimation To="#D0D2D5" 
+                                        Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" 
+                                        FillBehavior="HoldEnd" Duration="0:0:0" AutoReverse="False" RepeatBehavior="1x">
+                            </ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" 
+                                            FillBehavior="HoldEnd" Duration="0:0:0.05" AutoReverse="False" RepeatBehavior="1x"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>-->
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="Red"/>
+                <!--<Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            --><!--Không thể bidding hoặc thay màu static vào đây được-->
+                            <!--<ColorAnimation To="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" 
+                                        Storyboard.TargetProperty="(Control.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" 
+                                        FillBehavior="HoldEnd" Duration="0:0:0" AutoReverse="False" RepeatBehavior="1x">
+                            </ColorAnimation>--><!--
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[1].Offset"
+                                             FillBehavior="HoldEnd"
+                                         From="0" To="1" Duration="0:0:0.2"
+                                         AutoReverse="False" RepeatBehavior="1x">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>-->
             </Trigger>
         </Style.Triggers>
     </Style>

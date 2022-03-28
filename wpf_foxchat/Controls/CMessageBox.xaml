@@ -78,33 +78,28 @@
                 Grid.Row="1" Grid.Column="0"
                 Margin="0,0,0,2">
             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                <!--GradientStartColor="#8FC0F2"-->
                 <local:CButton  BorderRadius="4"
                                 Margin="5,0,0,0"
+                                Style="{StaticResource BTN_FunctionStyle}"
+                                GradientStartColor="#8FC0F2"
+                                GradientEndColor="#1F86FB"
                                 Foreground="WhiteSmoke"
+                                BorderThickness="1" 
+                                BorderBrush="#7CB6F3"
                                 Width="80"
                                 Content="OK">
-                    <local:CButton.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <LinearGradientBrush.GradientStops>
-                                <GradientStop Offset="0"   Color="#8FC0F2" />
-                                <GradientStop Offset="1"   Color="#1F86FB" />
-                            </LinearGradientBrush.GradientStops>
-                        </LinearGradientBrush>
-                    </local:CButton.Background>
                 </local:CButton>
+                <!--GradientStartColor="#FFFFFF"-->
                 <local:CButton  BorderRadius="4"
                                 Margin="5,0,0,0"
+                                Style="{StaticResource BTN_FunctionStyle}"
+                                GradientStartColor="#FFFFFF"
+                                GradientEndColor="#D0D2D5"
                                 BorderThickness="1" 
+                                BorderBrush="#D2D2D2"
                                 Width="80"
                                 Content="Cancel">
-                    <local:CButton.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                            <LinearGradientBrush.GradientStops>
-                                <GradientStop Offset="0"   Color="#FFFFFF" />
-                                <GradientStop Offset="1"   Color="#EDEDED" />
-                            </LinearGradientBrush.GradientStops>
-                        </LinearGradientBrush>
-                    </local:CButton.Background>
                 </local:CButton>
             </StackPanel>
         </Border>
