@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using wpf_foxchat.ViewModels;
 
 namespace wpf_foxchat.Controllers
 {
-    public class MainViewController
+    public abstract class Controller
     {
-        private MainViewModel mViewModel;
-        private MainChat      mView;
+        public BaseViewModel MainViewModel;
+        public Window        MainView;
 
+        public BaseViewModel GetMainView()
+        {
+            return MainViewModel;
+        }
+    }
+
+    public class MainViewController : Controller
+    {
         public MainViewController()
         {
             InitMainViewModel();
@@ -19,12 +28,12 @@ namespace wpf_foxchat.Controllers
 
         public void InitMainViewModel()
         {
-            mView      = new MainChat();
-            mViewModel = new MainViewModel();
+            MainView      = new MainChat();
+            MainViewModel = new MainViewModel(this);
 
-            mView.DataContext = mViewModel;
+            MainView.DataContext = MainViewModel;
 
-            mView.Show();
+            MainView.Show();
         }
     }
 }

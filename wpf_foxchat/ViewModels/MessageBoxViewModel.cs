@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using wpf_foxchat.Controls;
+﻿using wpf_foxchat.Controllers;
 
 namespace wpf_foxchat.ViewModels
 {
     class MessageBoxViewModel : BaseViewModel
     {
-        public MessageBoxViewModel()
+        public MessageBoxViewModel(Controller ctrl, BaseViewModel parent): base(ctrl)
         {
-            CWindow win       = new CWindow();
-            win.Width = 300;
-            win.Height = 200;
-            CMessageBox view = new CMessageBox();
-            win.Content_Control.Children.Add(view);
-            //view.DataContext = this;
-            SetWindow(win);
+            if (CreateDialog( DlgType.DLG_MESSAGE_BOX, parent))
+            {
+                // Khởi tạo dialog thành công
+            }
+        }
+
+        public override bool OnInitControl()
+        {
+            return true;
+        }
+
+        public override bool OnInitData()
+        {
+            return true;
         }
     }
 }

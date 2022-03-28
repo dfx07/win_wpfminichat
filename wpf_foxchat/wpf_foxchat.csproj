@@ -163,6 +163,7 @@
     <Compile Include="Models\Messages.cs" />
     <Compile Include="Controls\Com\Utils.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Enum.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />

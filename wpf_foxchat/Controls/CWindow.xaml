@@ -13,6 +13,26 @@
         ResizeMode="CanResize"
         MinHeight="100" MinWidth="300"
         SizeToContent='WidthAndHeight'>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1" Duration="00:00:00.2"/>
+                </Storyboard>
+            </BeginStoryboard>
+            <!--<BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames 
+                                        BeginTime="00:00:00"
+                                        Storyboard.TargetProperty="(Effect).Opacity" RepeatBehavior="2x">
+                            <SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5"/>
+                            <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>-->
+        </EventTrigger>
+    </Window.Triggers>
     <Window.Resources>
         <SolidColorBrush x:Key="TitleBarDialogColor">#E6E6E6</SolidColorBrush>
     </Window.Resources>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +22,38 @@ namespace wpf_foxchat
 {
     public partial class MainChat : Window
     {
+
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName]string propertyName = null)
+        //{
+        //    if (!EqualityComparer<T>.Default.Equals(field, newValue))
+        //    {
+        //        field = newValue;
+        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        //protected virtual void RaisePropertyChanged(string propertyName)
+        //{
+        //    var handler = PropertyChanged;
+        //    if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        // Phần thuộc tính thiết lập cài đặt window chính
+        //public Visibility VisiblePopupDialog { get; set; }
+
         public MainChat()
         {
+            DefaultSetting();
             InitializeComponent();
+        }
+
+        private void DefaultSetting()
+        {
+            //VisiblePopupDialog = Visibility.Collapsed;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
