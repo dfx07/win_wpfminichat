@@ -12,7 +12,8 @@ namespace wpf_foxchat.ViewModels
         private BaseViewModel   m_ParentViewModel;
         private bool            m_bModeless;
 
-        /////////////////////| Phần thuộc tính thiết lập chung View |//////////////////
+        #region ****************[ Phần thuộc tính thiết lập chung View ]***************
+
         public Visibility _VisiblePopupOverflow { get; set; }
         public Visibility  VisiblePopupOverflow
         {
@@ -23,6 +24,7 @@ namespace wpf_foxchat.ViewModels
                 RaisePropertyChanged("VisiblePopupOverflow");
             }
         }
+        #endregion ********************************************************************
 
         private void SetDefaultProperty()
         {
@@ -46,6 +48,13 @@ namespace wpf_foxchat.ViewModels
         public Controller GetController()
         {
             return m_pCtrl;
+        }
+        // =============================================================================
+        // Đóng cửa sổ window                                                           
+        // =============================================================================
+        public void Close()
+        {
+            m_Window.Close();
         }
 
         // =============================================================================
@@ -159,11 +168,11 @@ namespace wpf_foxchat.ViewModels
         }
 
 
-        //////////////////////////////////// Phần này xử lý sự kiện không chỉnh sửa //////////////////////////////////// 
+        #region ***************[ Phần này xử lý sự kiện không chỉnh sửa ]***************
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             this.OnInitControl();
         }
-        //////////////////////////////////// Phần này xử lý sự kiện không chỉnh sửa //////////////////////////////////// 
+        #endregion *********************************************************************
     }
 }

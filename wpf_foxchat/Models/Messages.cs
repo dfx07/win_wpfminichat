@@ -36,8 +36,8 @@ namespace wpf_foxchat.Models
         public MessageItem()
         {
             Reaction = new List<MessageItemReactionStatistical>();
-            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 0, ReactionCount = 4 });
-            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 2, ReactionCount = 4 });
+            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 0, ReactionCount = 0 });
+            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 2, ReactionCount = 0 });
         }
     }
 }

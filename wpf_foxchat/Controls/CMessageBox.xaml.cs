@@ -15,6 +15,26 @@ using System.Windows.Shapes;
 
 namespace wpf_foxchat.Controls
 {
+    // Image hiển thị cùng thông báo
+    public enum CMessageIcon
+    {
+        INFORMATION,
+        WARNING,
+        ERROR,
+        QUESTION,
+        SUCCESS
+    }
+
+    // Trạng thái các button hiển thị cùng thông báo
+    public enum CMessageButton
+    {
+        OK,
+        OK_CANCEL,
+        OK_CANCEL_RETRY,
+    }
+
+
+
     /// <summary>
     /// Interaction logic for CMessage.xaml
     /// </summary>

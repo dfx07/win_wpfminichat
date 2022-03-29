@@ -14,6 +14,37 @@
         MinHeight="100" MinWidth="300"
         SizeToContent='WidthAndHeight'>
 
+    <Window.RenderTransform>
+        <TranslateTransform X="0" Y="0" />
+    </Window.RenderTransform>
+
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Style.Triggers>
+                <Trigger Property="Visibility" Value="Visible">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!--<DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1"/>-->
+                                <!--<DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                                                             From="500" Duration="0:0:0.5" SpeedRatio="1">
+                                    <DoubleAnimation.EasingFunction>
+                                        <ElasticEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>-->
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                 From="20" Duration="0:0:0.7" SpeedRatio="1">
+                                    <DoubleAnimation.EasingFunction>
+                                        <ElasticEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
@@ -37,9 +68,10 @@
         <SolidColorBrush x:Key="TitleBarDialogColor">#E6E6E6</SolidColorBrush>
     </Window.Resources>
     <Grid Background="Transparent"
-          Margin="20">
+          Margin="10">
+       
         <Grid.Effect>
-            <DropShadowEffect  ShadowDepth="0"  BlurRadius="20"/>
+            <DropShadowEffect  ShadowDepth="0"  BlurRadius="10"/>
         </Grid.Effect>
         <Grid.RowDefinitions>
             <RowDefinition Height="26"></RowDefinition>
@@ -103,7 +135,7 @@
                         </Image>
                         <TextBlock VerticalAlignment="Center"
                                    TextAlignment="Right"
-                                   FontSize="13"
+                                   FontSize="12"
                                    Padding="10,0,0,0"
                                    Text="{Binding Title}">
                         </TextBlock>

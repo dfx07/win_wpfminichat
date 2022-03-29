@@ -214,8 +214,8 @@
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <LinearGradientBrush.GradientStops>
-                        <GradientStop x:Name="GRAID_0" Offset="0" Color="{Binding GradientStartColor, RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}}" />
-                        <GradientStop x:Name="GRAID_1" Offset="1" Color="{Binding GradientEndColor, RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}}" />
+                        <GradientStop x:Name="GRAID_0" Offset="0" Color="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}, Path=GradientStartColor}" />
+                        <GradientStop x:Name="GRAID_1" Offset="1" Color="{Binding RelativeSource={RelativeSource AncestorType={x:Type ctrl:CButton}}, Path=GradientEndColor  }" />
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Setter.Value>
@@ -245,7 +245,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="BOR_CButtonFun" Property="BorderBrush" Value="#FFD282F7"/>
+                            <Setter TargetName="BOR_CButtonFun" Property="BorderBrush" Value="#3C7FB1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -262,6 +262,11 @@
 
     <!--Thuộc tính của ButtonVM sẽ được Binding tương ứng nếu sử dụng style này-->
     <Style x:Key="CButtonStyleVM" TargetType="{x:Type ctrl:CButton}" BasedOn="{StaticResource {x:Type ctrl:CButton}}">
+        <Setter Property="Visibility"  Value="{Binding  Visibility}"/>
+        <Setter Property="IsEnabled"   Value="{Binding  IsEnabled}"/>
+    </Style>
+
+    <Style x:Key="CButtonFuncStyleVM" TargetType="{x:Type ctrl:CButton}" BasedOn="{StaticResource BTN_FunctionStyle}">
         <Setter Property="Visibility"  Value="{Binding  Visibility}"/>
         <Setter Property="IsEnabled"   Value="{Binding  IsEnabled}"/>
     </Style>

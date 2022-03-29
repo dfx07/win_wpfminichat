@@ -22,6 +22,7 @@ namespace wpf_foxchat.Controls
     /// </summary>
     public partial class CWindow : Window, INotifyPropertyChanged
     {
+        #region ***********************[ Raise property changed ]*********************
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName]string propertyName = null)
@@ -34,19 +35,42 @@ namespace wpf_foxchat.Controls
             }
             return false;
         }
-
         protected virtual void RaisePropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion ********************************************************************
 
-        public Visibility     VisibleTitleBar        { get; set; }
-        public Visibility     VisibleImageTitleBar   { get; set; }
 
-        public ButtonVM       BTN_Minimize           { get; set; }
-        public ButtonVM       BTN_Maximize           { get; set; }
-        public ButtonVM       BTN_Close              { get; set; }
+        #region ****************[ Phần thuộc tính thiết lập chung View ]***************
+        private Visibility _VisibleTitleBar { get; set; }
+        public  Visibility  VisibleTitleBar
+        {
+            get { return _VisibleTitleBar; }
+            set
+            {
+                _VisibleTitleBar = value;
+                RaisePropertyChanged("VisibleTitleBar");
+            }
+        }
+
+        private Visibility _VisibleImageTitleBar { get; set; }
+        public  Visibility  VisibleImageTitleBar
+        {
+            get { return _VisibleImageTitleBar; }
+            set
+            {
+                _VisibleImageTitleBar = value;
+                RaisePropertyChanged("VisibleImageTitleBar");
+            }
+        }
+
+        public ButtonVM    BTN_Minimize   { get; set; }
+        public ButtonVM    BTN_Maximize   { get; set; }
+        public ButtonVM    BTN_Close      { get; set; }
+        #endregion *********************************************************************
+
 
         public CWindow()
         {

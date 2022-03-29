@@ -1,10 +1,5 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using wpf_foxchat.Controllers;
 using wpf_foxchat.Models;
 
@@ -72,10 +67,20 @@ namespace wpf_foxchat.ViewModels
         private void OnOK(object param)
         {
             MessageBoxViewModel msg = new MessageBoxViewModel(this.GetController(), this);
-            Controller ctrl = GetController();
-            var MainViewModel =  ctrl.GetMainView();
-            
             msg.ShowDialog();
+
+            if(msg.Result == CMessageResult.OK)
+            {
+                MessageBox.Show("OK");
+            }
+            else if (msg.Result == CMessageResult.CANCEL)
+            {
+                MessageBox.Show("Cancel");
+            }
+            else if (msg.Result == CMessageResult.RETRY)
+            {
+                MessageBox.Show("Retry");
+            }
         }
 
 

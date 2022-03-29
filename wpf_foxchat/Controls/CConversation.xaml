@@ -61,7 +61,6 @@
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="Margin" Value="{Binding Margin}"/>
                                     <Style.Triggers>
                                         <!--Khi di chuyển vào sẽ đổi màu-->
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -121,12 +120,11 @@
                                     </Grid.Style>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*" MaxHeight="14"/>
                                     </Grid.RowDefinitions>
 
                                     <!--Phần đuôi hiển thị-->
-                                    <Grid x:Name="MessageTail"
-                                          Grid.Row="0" Grid.Column="0"
+                                    <Grid x:Name="MessageTail" Grid.Row="0" Grid.Column="0"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch">
                                         <Path Data="{StaticResource Geo_MessageTail}" VerticalAlignment="Bottom"
@@ -157,7 +155,7 @@
                                     </Grid>
                                     <!--Nội dung thông điệp-->
                                     <StackPanel Orientation="Horizontal"
-                                            VerticalAlignment="Stretch">
+                                                VerticalAlignment="Stretch">
                                         <StackPanel.Style>
                                             <Style TargetType="{x:Type StackPanel}">
                                                 <Setter Property="FlowDirection" Value="RightToLeft"/>
@@ -220,11 +218,11 @@
                                         </Grid>
                                         <!--Phần này là phần nội dung tin nhắn-->
                                         <Border x:Name="MessageContent" 
-                                        Grid.Row="0" Grid.Column="0"
-                                        CornerRadius="30"
-                                        MinHeight="20"
-                                        MinWidth="100"
-                                        MaxWidth="500">
+                                                Grid.Row="0" Grid.Column="0"
+                                                CornerRadius="25"
+                                                MinHeight="20"
+                                                MinWidth="100"
+                                                MaxWidth="500">
                                             <!--Điều chỉnh màu nền trùng với trạng thái-->
                                             <Border.Style>
                                                 <Style TargetType="{x:Type Border}">
@@ -241,9 +239,8 @@
                                             </TextBlock>
                                         </Border>
                                     </StackPanel>
-
                                     <!--Thông tin về thời gian trạng thái-->
-                                    <Grid Grid.Row="1" Grid.Column="0">
+                                    <Grid x:Name="MessageInfo" Grid.Row="1" Grid.Column="0">
                                         <DockPanel LastChildFill="True"
                                                    HorizontalAlignment="Stretch">
                                             <DockPanel.Style>

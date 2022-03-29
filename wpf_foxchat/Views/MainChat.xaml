@@ -848,6 +848,25 @@
                     Background="#33000000" 
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch">
+                <Border.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Border.RenderTransform>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <Trigger Property="Visibility" Value="Visible">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                             From="0.0" To="1.0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
             </Border>
         </Grid>
     </Border>

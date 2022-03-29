@@ -10,8 +10,7 @@
         <Style x:Key="BorderReactionStatisticalStyle" TargetType="{x:Type Border}">
             <Setter Property="CornerRadius"         Value="7"/>
             <Setter Property="Margin"               Value="1,0,0,0"/>
-            <Setter Property="Padding"              Value="1,0,2,0"/>
-            <Setter Property="BorderThickness"      Value="1"/>
+            <Setter Property="Padding"              Value="1,0,1,0"/>
             <Setter Property="BorderBrush"          Value="Wheat"/>
             <Setter Property="Background"           Value="#FFEFF1F3"/>
         </Style>
@@ -42,7 +41,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Column="0" Width="12">
+                                <Image Grid.Column="0" Width="14">
                                     <Image.Style>
                                         <Style TargetType="{x:Type Image}">
                                             <Style.Triggers>
@@ -82,7 +81,6 @@
                 <Setter.Value>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" 
-                                    MaxHeight="14" 
                                     VerticalAlignment="Top">
                         </StackPanel>
                     </ItemsPanelTemplate>

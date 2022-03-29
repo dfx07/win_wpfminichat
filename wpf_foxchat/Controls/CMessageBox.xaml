@@ -48,20 +48,40 @@
                 Padding="10">
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" MaxWidth="60"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0">
+                <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding VisibleImage}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <!--Image thông báo-->
-                    <Grid Grid.Row="0" Grid.Column="0"
-                          Background="Transparent"
-                          Margin="5">
-                        <Image Source="{StaticResource Erro_Alert_Source}">
+                    <Grid Grid.Row="0" Grid.Column="0" Background="Transparent" Margin="5">
+                        <Image>
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Info_Alert_Source}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding XIcon}" Value="{x:Static local:CMessageIcon.INFORMATION}">
+                                            <Setter Property="Source" Value="{StaticResource Info_Alert_Source}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding XIcon}" Value="{x:Static local:CMessageIcon.WARNING}">
+                                            <Setter Property="Source" Value="{StaticResource Warn_Alert_Source}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding XIcon}" Value="{x:Static local:CMessageIcon.ERROR}">
+                                            <Setter Property="Source" Value="{StaticResource Erro_Alert_Source}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding XIcon}" Value="{x:Static local:CMessageIcon.QUESTION}">
+                                            <Setter Property="Source" Value="{StaticResource Ques_Alert_Source}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding XIcon}" Value="{x:Static local:CMessageIcon.SUCCESS}">
+                                            <Setter Property="Source" Value="{StaticResource Succ_Alert_Source}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
                         </Image>
                     </Grid>
                 </Grid>
@@ -81,25 +101,48 @@
                 <!--GradientStartColor="#8FC0F2"-->
                 <local:CButton  BorderRadius="4"
                                 Margin="5,0,0,0"
-                                Style="{StaticResource BTN_FunctionStyle}"
+                                Style="{StaticResource CButtonFuncStyleVM}"
+                                DataContext="{Binding BTN_OK}"
                                 GradientStartColor="#8FC0F2"
                                 GradientEndColor="#1F86FB"
                                 Foreground="WhiteSmoke"
                                 BorderThickness="1" 
                                 BorderBrush="#7CB6F3"
                                 Width="80"
-                                Content="OK">
+                                Content="OK"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CMessageBox}},
+                                                  Path=DataContext.CmdOnOK}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
                 </local:CButton>
                 <!--GradientStartColor="#FFFFFF"-->
                 <local:CButton  BorderRadius="4"
                                 Margin="5,0,0,0"
-                                Style="{StaticResource BTN_FunctionStyle}"
+                                Style="{StaticResource CButtonFuncStyleVM}"
+                                DataContext="{Binding BTN_Cancel}"
                                 GradientStartColor="#FFFFFF"
                                 GradientEndColor="#D0D2D5"
                                 BorderThickness="1" 
                                 BorderBrush="#D2D2D2"
                                 Width="80"
-                                Content="Cancel">
+                                Content="Cancel"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CMessageBox}},
+                                                  Path=DataContext.CmdOnCancel}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                </local:CButton>
+                <!--GradientStartColor="#FFFFFF"-->
+                <local:CButton  BorderRadius="4"
+                                Margin="5,0,0,0"
+                                Style="{StaticResource CButtonFuncStyleVM}"
+                                DataContext="{Binding BTN_Retry}"
+                                GradientStartColor="#FFFFFF"
+                                GradientEndColor="#D0D2D5"
+                                BorderThickness="1" 
+                                BorderBrush="#D2D2D2"
+                                Width="80"
+                                Content="Retry"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CMessageBox}},
+                                                  Path=DataContext.CmdOnRetry}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
                 </local:CButton>
             </StackPanel>
         </Border>
