@@ -46,6 +46,20 @@
         <Style TargetType="Button">
             <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
         </Style>
+
+
+        <Storyboard x:Key="Ani_CollapseNavi">
+            <DoubleAnimation Duration="0:0:1"
+                             Storyboard.TargetName="xGrid_NavigationLeft"
+                             Storyboard.TargetProperty="Width" 
+                             Completed="xGrid_NavigationLeftMini_End"
+                             From="300" To="70">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
     </Window.Resources>
     <Border Background="{StaticResource TitleBarColor}" CornerRadius="10,12,10,10" Margin="0">
         <Grid Background="Transparent">
@@ -95,50 +109,22 @@
             <!-- ======================================  Body ====================================== -->
             <Grid x:Name="Body" Grid.Row="1" Grid.Column="0"
                   Margin="0" Background="#35393D">
+
                 <DockPanel LastChildFill="True"
                            FlowDirection="LeftToRight"
                            HorizontalAlignment="Stretch"
                            Grid.ColumnSpan="2">
-                    <!--Background="#2E3033"-->
-                    <Button x:Name="BTN_Mininavi"
-                                Grid.Column="2"
-                                FlowDirection="RightToLeft" 
-                                BorderThickness="0"
-                                Style="{StaticResource ButtonChangeHover}"
-                                Background="Transparent"
-                                FontSize="20"
-                                Width="20" 
-                                Height="20"
-                                Click="BTN_MininaviClick"
-                                Content="&#xf191;"
-                                HorizontalAlignment="Right">
-                        <Button.Triggers>
-                            <EventTrigger RoutedEvent="Button.Click">
-                                <BeginStoryboard x:Name="xSto_Mavimini">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:1"
-                                                         Storyboard.TargetName="xGrid_NavigationLeft"
-                                                         Storyboard.TargetProperty="Width" 
-                                                         From="300" To="70" 
-                                                         Completed="xGrid_NavigationLeftMini_End"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                                <BeginStoryboard x:Name="xSto_Mavirestore">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:1"
-                                                         Storyboard.TargetName="xGrid_NavigationLeft"
-                                                         Storyboard.TargetProperty="Width" 
-                                                         From="70" To="30" 
-                                                         Completed="xGrid_NavigationLeftMini_End"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Button.Triggers>
-                    </Button>
+                    <Grid x:Name="xGrid_FunctionNavi" 
+                          Width="26">
+                        
+                    </Grid>
                     <!-- ======================================  Navigation left ====================================== -->
                     <Grid  x:Name="xGrid_NavigationLeft" Grid.Row="0" Grid.Column="0" Background="#2E3033"
                            Width="300"
-                           HorizontalAlignment="Left" >
+                           HorizontalAlignment="Left">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="40"/>
@@ -165,11 +151,35 @@
                                       Content="&#xf2bd;">
                             </ToggleButton>
                             <Label x:Name="usename"
-                               Grid.Column="1"
-                               Content="DesertFox"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center">
+                                   Grid.Column="1"
+                                   Content="DesertFox"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
                             </Label>
+
+                            <ToggleButton x:Name="BTN_Mininavi"
+                                          Grid.Column="2"
+                                          FlowDirection="RightToLeft" 
+                                          BorderThickness="0"
+                                          Background="Transparent"
+                                          FontSize="20"
+                                          Width="20" 
+                                          Height="20"
+                                          Click="BTN_MininaviClick"
+                                          HorizontalAlignment="Right">
+                                <ToggleButton.Style>
+                                    <Style TargetType="{x:Type ToggleButton}" BasedOn="{ StaticResource ToggleButtonIconHover}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked" Value="False">
+                                                <Setter Property="Content" Value="&#xf191;"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Content" Value="&#xf152;"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
                         </Grid>
 
                         <!--Box search-->
@@ -665,13 +675,16 @@
                     </Grid>
 
                     <!-- ====================================  Chat content chanel ==================================== -->
-                    <Grid  x:Name="xGrid_Contentchat" Grid.Row="0" Grid.Column="1" Background="Transparent">
-                        <DockPanel LastChildFill="True" Margin="5" Background="WhiteSmoke">
+                    <Grid  x:Name="xGrid_Contentchat" Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" Background="Transparent">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
+                        <DockPanel x:Name="xDockPanel_Contentchat" LastChildFill="True" >
                             <!--Chat bar-->
                             <Grid  Height="35"
-                               DockPanel.Dock="Bottom" 
-                               VerticalAlignment="Stretch" 
-                               HorizontalAlignment="Stretch">
+                                   DockPanel.Dock="Bottom" 
+                                   VerticalAlignment="Stretch" 
+                                   HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="25"/>
@@ -818,7 +831,7 @@
                             </Grid>
                             </Border>
                             <!--Content chat chanel-->
-                            <Grid  Background="Transparent" 
+                            <Grid  x:Name="xGrid_Content" Background="WhiteSmoke"
                                    HorizontalAlignment="Stretch" 
                                    Margin="0,0,5,0">
                                 <ctrl:CConversation  BorderThickness="0"></ctrl:CConversation>

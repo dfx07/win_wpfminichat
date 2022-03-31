@@ -115,6 +115,9 @@
                                     <DoubleAnimation  Storyboard.TargetName="PART_VerticalScrollBar" 
                                                       Storyboard.TargetProperty="Opacity"
                                                       From="1.0" To="0.0" Duration="0:0:1.5" AutoReverse="False">
+                                        <DoubleAnimation.EasingFunction>
+                                            <ExponentialEase  EasingMode="EaseIn"/>
+                                        </DoubleAnimation.EasingFunction>
                                     </DoubleAnimation>
                                 </Storyboard>
                             </BeginStoryboard>

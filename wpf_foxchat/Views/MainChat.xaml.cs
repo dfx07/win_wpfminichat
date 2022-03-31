@@ -140,24 +140,66 @@ namespace wpf_foxchat
             SetDstImage(bitmap);
         }
 
+
+        void AnimationNavigation(double _from, double _to, double _from2, double _to2)
+        {
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation dbAnima = new DoubleAnimation();
+            dbAnima.From        = _from;
+            dbAnima.To          = _to;
+            dbAnima.Duration    = new Duration(TimeSpan.FromSeconds(0.5));
+            dbAnima.AutoReverse = false;
+            dbAnima.Completed  += xGrid_NavigationLeftMini_End;
+
+            PowerEase easingFunction = new PowerEase();
+            easingFunction.EasingMode = EasingMode.EaseOut;
+            dbAnima.EasingFunction = easingFunction;
+
+            storyboard.Children.Add(dbAnima);
+
+            Storyboard.SetTargetName(dbAnima, xGrid_NavigationLeft.Name);
+            Storyboard.SetTargetProperty(dbAnima, new PropertyPath("Width"));
+
+
+            //DoubleAnimation dbAnima2 = new DoubleAnimation();
+            //dbAnima2.From = _from2;
+            //dbAnima2.To = _to2;
+            //dbAnima2.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+
+            //storyboard.Children.Add(dbAnima2);
+
+            //Storyboard.SetTargetName(dbAnima2, xGrid_Contentchat.Name);
+            //Storyboard.SetTargetProperty(dbAnima2, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+
+            storyboard.Begin(this);
+        }
+
         private void BTN_MininaviClick(object sender, RoutedEventArgs e)
         {
-            xGird_Naviheader.Visibility  = Visibility.Hidden;
-            xGrid_Navisearch.Visibility  = Visibility.Hidden;
-            xGrid_Navicontact.Visibility = Visibility.Hidden;
-            xGrid_Navifooter.Visibility  = Visibility.Hidden;
+            double dFrom, dTo, dFrom2, dTo2;
+            if (xGrid_NavigationLeft.Width >= 300)
+            {
+                dFrom = 300;
+                dTo   = 70;
 
-            xGrid_Contentchat.Visibility = Visibility.Hidden;
+                dFrom2 = 0;
+                dTo2   = -(dFrom - dTo);
+            }
+            else
+            {
+                dFrom   = 70;
+                dTo     = 300;
+
+                dFrom2  = -(dTo - dFrom);
+                dTo2    = 0;
+            }
+            AnimationNavigation(dFrom, dTo, 0, 0);
         }
 
         private void xGrid_NavigationLeftMini_End(object sender, EventArgs e)
         {
-            xGird_Naviheader.Visibility  = Visibility.Visible;
-            xGrid_Navisearch.Visibility  = Visibility.Visible;
-            xGrid_Navicontact.Visibility = Visibility.Visible;
-            xGrid_Navifooter.Visibility  = Visibility.Visible;
-
-            xGrid_Contentchat.Visibility = Visibility.Visible;
+            //xGrid_Contentchat.Visibility = Visibility.Visible;
         }
     }
 }

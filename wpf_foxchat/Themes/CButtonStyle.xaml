@@ -62,29 +62,18 @@
     <Style x:Key="ToggleButtonIconHover" TargetType="{x:Type ToggleButton}">
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}"/>
         <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="Background" Value="Transparent"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
                             CornerRadius="12">
-                        <!--Khi hover vào mới hiện thị vòng tròn-->
-                        <Border.Style>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FFD6D6D6"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-
                         <ContentPresenter Content="{TemplateBinding Content}"
                                           HorizontalAlignment="Center" 
                                           VerticalAlignment="Center" >
                         </ContentPresenter>
-
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -94,7 +83,7 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#393939"
+                            <ColorAnimation To="#FDF4BF"
                                         Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)" 
                                         FillBehavior="HoldEnd" Duration="0:0:0" AutoReverse="False" RepeatBehavior="1x"/>
                         </Storyboard>

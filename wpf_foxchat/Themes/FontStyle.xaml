@@ -6,5 +6,6 @@
     <FontFamily x:Key="FontRobotoMono">RobotoMono</FontFamily>
     <!--Define color text-->
     <SolidColorBrush  x:Key="TextColor">#777879</SolidColorBrush>
+    <SolidColorBrush  x:Key="TextHoverColor">#0F82FF</SolidColorBrush>
 
 </ResourceDictionary>
