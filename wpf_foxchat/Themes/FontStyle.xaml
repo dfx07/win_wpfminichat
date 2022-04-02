@@ -7,5 +7,5 @@
     <!--Define color text-->
     <SolidColorBrush  x:Key="TextColor">#777879</SolidColorBrush>
     <SolidColorBrush  x:Key="TextHoverColor">#0F82FF</SolidColorBrush>
-
+    <SolidColorBrush  x:Key="TextHighLightColor">#BABCC0</SolidColorBrush>
 </ResourceDictionary>

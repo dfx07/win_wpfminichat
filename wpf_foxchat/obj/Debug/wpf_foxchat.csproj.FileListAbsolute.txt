@@ -78,3 +78,5 @@ G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.g.resources
 G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.Properties.Resources.resources
 G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.csproj.GenerateResource.Cache
 G:\win_wpfminichat\wpf_foxchat\obj\Debug\wpf_foxchat.csprojResolveAssemblyReference.cache
+G:\win_wpfminichat\wpf_foxchat\obj\Debug\Controls\CUserContactCard.g.cs
+G:\win_wpfminichat\wpf_foxchat\obj\Debug\Controls\CUserContactCard.baml

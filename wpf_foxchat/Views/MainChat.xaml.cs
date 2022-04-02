@@ -140,21 +140,37 @@ namespace wpf_foxchat
             SetDstImage(bitmap);
         }
 
+        static void SwapDouble(ref double num1, ref double num2)
+        {
+            double temp;
 
-        void AnimationNavigation(double _from, double _to, double _from2, double _to2)
+            temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+
+        void AnimationNavigation(bool bExpand, double _timeduration)
         {
             Storyboard storyboard = new Storyboard();
+
+            double _from    = 70, _to    = 300;
+            double _fromOpa = 0 , _toOpa = 1;
+            if(!bExpand)
+            {
+                SwapDouble(ref _from   , ref _to   );
+                SwapDouble(ref _fromOpa, ref _toOpa);
+            }
 
             DoubleAnimation dbAnima = new DoubleAnimation();
             dbAnima.From        = _from;
             dbAnima.To          = _to;
-            dbAnima.Duration    = new Duration(TimeSpan.FromSeconds(0.5));
+            dbAnima.Duration    = new Duration(TimeSpan.FromSeconds(_timeduration));
             dbAnima.AutoReverse = false;
             dbAnima.Completed  += xGrid_NavigationLeftMini_End;
 
-            PowerEase easingFunction = new PowerEase();
+            PowerEase easingFunction  = new PowerEase();
             easingFunction.EasingMode = EasingMode.EaseOut;
-            dbAnima.EasingFunction = easingFunction;
+            dbAnima.EasingFunction    = easingFunction;
 
             storyboard.Children.Add(dbAnima);
 
@@ -162,44 +178,51 @@ namespace wpf_foxchat
             Storyboard.SetTargetProperty(dbAnima, new PropertyPath("Width"));
 
 
-            //DoubleAnimation dbAnima2 = new DoubleAnimation();
-            //dbAnima2.From = _from2;
-            //dbAnima2.To = _to2;
-            //dbAnima2.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            dbAnima = new DoubleAnimation();
+            dbAnima.From = _fromOpa;
+            dbAnima.To   = _toOpa;
+            dbAnima.Duration = new Duration(TimeSpan.FromSeconds(_timeduration));
+            dbAnima.AutoReverse = false;
 
-            //storyboard.Children.Add(dbAnima2);
+            easingFunction = new PowerEase();
+            easingFunction.EasingMode = EasingMode.EaseOut;
+            dbAnima.EasingFunction = easingFunction;
 
-            //Storyboard.SetTargetName(dbAnima2, xGrid_Contentchat.Name);
-            //Storyboard.SetTargetProperty(dbAnima2, new PropertyPath("RenderTransform.(TranslateTransform.X)"));
+            storyboard.Children.Add(dbAnima);
+
+            Storyboard.SetTargetName(dbAnima, xLAB_UserName.Name);
+            Storyboard.SetTargetProperty(dbAnima, new PropertyPath("Opacity"));
 
             storyboard.Begin(this);
         }
 
         private void BTN_MininaviClick(object sender, RoutedEventArgs e)
         {
-            double dFrom, dTo, dFrom2, dTo2;
+            bool bExpand = true;
             if (xGrid_NavigationLeft.Width >= 300)
             {
-                dFrom = 300;
-                dTo   = 70;
-
-                dFrom2 = 0;
-                dTo2   = -(dFrom - dTo);
+                bExpand = false;
             }
-            else
-            {
-                dFrom   = 70;
-                dTo     = 300;
 
-                dFrom2  = -(dTo - dFrom);
-                dTo2    = 0;
-            }
-            AnimationNavigation(dFrom, dTo, 0, 0);
+            AnimationNavigation(bExpand, 0.5);
         }
 
         private void xGrid_NavigationLeftMini_End(object sender, EventArgs e)
         {
-            //xGrid_Contentchat.Visibility = Visibility.Visible;
+            //xLAB_UserName.Visibility = Visibility.Collapsed;
+        }
+
+        private void CScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            ScrollViewer scrollViewer = sender as ScrollViewer;
+            if (e.VerticalChange == 0)
+            {
+                scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+            }
+            else
+            {
+                scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            }
         }
     }
 }

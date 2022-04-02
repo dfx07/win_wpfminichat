@@ -6,6 +6,7 @@ FG:\win_wpfminichat\wpf_foxchat\Controls\CProfileInfo.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CProfile.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CReaction.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CReactionStatistical.xaml;;
+FG:\win_wpfminichat\wpf_foxchat\Controls\CUserContactCard.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CWindow.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\CAnimation.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\CButtonStyle.xaml;;

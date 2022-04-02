@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace wpf_foxchat.Models
 {
@@ -36,8 +32,8 @@ namespace wpf_foxchat.Models
         public MessageItem()
         {
             Reaction = new List<MessageItemReactionStatistical>();
-            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 0, ReactionCount = 0 });
-            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 2, ReactionCount = 0 });
+            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 0, ReactionCount = 2 });
+            Reaction.Add(new MessageItemReactionStatistical { ReactionType = 2, ReactionCount = 2 });
         }
     }
 }

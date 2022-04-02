@@ -12,4 +12,5 @@
     </Style>
 
     <SolidColorBrush  x:Key="TitleBarColor">#242423</SolidColorBrush>
+    <SolidColorBrush  x:Key="PanelHoverColor">#FF474A4D</SolidColorBrush>
 </ResourceDictionary>

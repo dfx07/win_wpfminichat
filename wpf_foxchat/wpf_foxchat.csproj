@@ -79,6 +79,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CUserContactCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +148,10 @@
     </Compile>
     <Compile Include="Controls\Com\CButton.cs" />
     <Compile Include="Controls\Com\PControl.cs" />
+    <Compile Include="Controls\CUserContactCard.xaml.cs">
+      <DependentUpon>CUserContactCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserContact.cs" />
     <Compile Include="ViewModels\BaseControl.cs" />
     <Compile Include="Controls\CProfileInfo.xaml.cs">
       <DependentUpon>CProfileInfo.xaml</DependentUpon>
