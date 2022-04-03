@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wpf_foxchat.Controls"
              mc:Ignorable="d" 
-             Width="330" Height="180">
+             MinWidth="200" MinHeight="100">
     <UserControl.Resources>
         <Style x:Key="CTextStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="Black"/>
@@ -20,8 +20,39 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Margin="0,0,10,0"
-            Opacity="0.98">
+    <Border x:Name="xUserInfoSummary"
+            Margin="0,0,50,0">
+        <Border.RenderTransform>
+            <TranslateTransform X="-8" Y="0"></TranslateTransform>
+        </Border.RenderTransform>
+        <Border.Style>
+            <Style TargetType="{x:Type Border}">
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                                                   Duration="0:0:3">
+                                        <LinearDoubleKeyFrame KeyTime="0:0:0"     Value="0" />
+                                        <LinearDoubleKeyFrame KeyTime="0:0:0.8"   Value="0.01" />
+                                        <LinearDoubleKeyFrame KeyTime="0:0:1.2"   Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimation
+                                              Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                                              From="-100" To="0" Duration="0:0:1.4" 
+                                              AutoReverse="False">
+                                        <DoubleAnimation.EasingFunction>
+                                            <ElasticEase EasingMode="EaseOut"/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
         <Grid>
             <Grid.Effect>
                 <DropShadowEffect  ShadowDepth="2" BlurRadius="10"/>

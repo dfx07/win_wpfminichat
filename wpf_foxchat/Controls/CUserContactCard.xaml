@@ -22,106 +22,99 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <Border x:Name="xUser"
-                                CornerRadius="5"
-                                Height="50"
-                                Margin="4,2,4,2">
-                            <Border.Style>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="Background" Value="#393B3E"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value= "{StaticResource PanelHoverColor}"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <!--Phần User Contact-->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                        <Border x:Name="xUser" Background="Transparent">
+                            <Border CornerRadius="5"
+                                    Height="50"
+                                    Margin="4,2,4,2">
+                                <Border.Style>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="Background" Value="#393B3E"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value= "{StaticResource PanelHoverColor}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <!--Phần User Contact-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                 <!--Hình ảnh đại diện-->
-                                 <Ellipse x:Name="xImageUserContact"
-                                          Grid.Row="0" Grid.Column="0"
-                                          Width="40" Margin="5">
-                                     <Ellipse.Fill>
-                                         <ImageBrush ImageSource="/Assets/face-user.png"
-                                             Stretch="UniformToFill"/>
-                                     </Ellipse.Fill>
-                                 </Ellipse>
+                                     <!--Hình ảnh đại diện-->
+                                     <Ellipse x:Name="xImageUserContact"
+                                              Grid.Row="0" Grid.Column="0"
+                                              Width="40" Margin="5">
+                                         <Ellipse.Fill>
+                                             <ImageBrush ImageSource="/Assets/face-user.png"
+                                                 Stretch="UniformToFill"/>
+                                         </Ellipse.Fill>
+                                     </Ellipse>
 
-                                 <!--Trạng thái người dùng-->
-                                 <Ellipse x:Name="xStatusUserContact"
-                                          Grid.Row="0" Grid.Column="0"
-                                          Height="12" Width="12" 
-                                          Stroke="WhiteSmoke"
-                                          Margin="25,30,0,0">
-                                    <Ellipse.Style>
-                                        <Style TargetType="{x:Type Ellipse}">
-                                            <Setter Property="Fill" Value="Gray"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsActive}" Value="True">
-                                                    <Setter Property="Fill" Value="Green"></Setter>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Ellipse.Style>
-                                 </Ellipse>
+                                     <!--Trạng thái người dùng-->
+                                     <Ellipse x:Name="xStatusUserContact"
+                                              Grid.Row="0" Grid.Column="0"
+                                              Height="12" Width="12" 
+                                              Stroke="WhiteSmoke"
+                                              Margin="25,30,0,0">
+                                        <Ellipse.Style>
+                                            <Style TargetType="{x:Type Ellipse}">
+                                                <Setter Property="Fill" Value="Gray"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                                        <Setter Property="Fill" Value="Green"></Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Ellipse.Style>
+                                     </Ellipse>
 
-                                 <!--Tên người dùng và tin nhắn cuối cùng-->
-                                 <Grid Grid.Row="0" Grid.Column="1">
-                                     <Grid.RowDefinitions>
-                                         <RowDefinition></RowDefinition>
-                                         <RowDefinition></RowDefinition>
-                                     </Grid.RowDefinitions>
-                                    <TextBlock  x:Name="xNameUserContact"
-                                                Grid.Row="0" Grid.Column="0"
-                                                Style="{StaticResource xTextUserContactCardStyle}"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Stretch"
-                                                Text="{Binding UserName}" >
-                                    </TextBlock>
-                                     <TextBlock x:Name="xLastMessageUserContact"
-                                                Grid.Row="1" Grid.Column="0"
-                                                Style="{StaticResource xTextUserContactCardStyle}"
-                                                MaxWidth="150"
-                                                FontSize="12"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Left"
-                                                TextTrimming="CharacterEllipsis"
-                                                Text="{Binding LastMessage}">
-                                     </TextBlock>
-                                 </Grid>
-                                 <!--Thông tin tổng quát-->
-                                 <Popup Placement="Right"
-                                        HorizontalOffset="-10"
-                                        VerticalOffset  ="-10"
-                                        AllowsTransparency="True">
-                                     <Popup.Style>
-                                         <!--Sự kiện khi hover vào tag và popup-->
-                                         <Style TargetType="{x:Type Popup}">
-                                             <Setter Property="IsOpen" Value="False"/>
-                                             <Style.Triggers>
-                                                 <!--Hover vào Item tên-->
-                                                 <DataTrigger Binding="{Binding Path=IsMouseOver,
-                                                              RelativeSource={RelativeSource
-                                                              AncestorType={x:Type Border}}}"
-                                                              Value="True">
-                                                     <Setter Property="IsOpen" Value="True"></Setter>
-                                                 </DataTrigger>
-                                                 <!--Hover vào popup profile-->
-                                                 <Trigger Property="IsMouseOver"  Value="True">
-                                                     <Setter Property="IsOpen" Value="True"></Setter>
-                                                 </Trigger>
-                                             </Style.Triggers>
-                                         </Style>
-                                     </Popup.Style>
-                                     <local:CProfile/>
-                                 </Popup>
-                            </Grid>
+                                     <!--Tên người dùng và tin nhắn cuối cùng-->
+                                     <Grid Grid.Row="0" Grid.Column="1">
+                                         <Grid.RowDefinitions>
+                                             <RowDefinition></RowDefinition>
+                                             <RowDefinition></RowDefinition>
+                                         </Grid.RowDefinitions>
+                                        <TextBlock  x:Name="xNameUserContact"
+                                                    Grid.Row="0" Grid.Column="0"
+                                                    Style="{StaticResource xTextUserContactCardStyle}"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Stretch"
+                                                    Text="{Binding UserName}" >
+                                        </TextBlock>
+                                         <TextBlock x:Name="xLastMessageUserContact"
+                                                    Grid.Row="1" Grid.Column="0"
+                                                    Style="{StaticResource xTextUserContactCardStyle}"
+                                                    MaxWidth="150"
+                                                    FontSize="12"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Left"
+                                                    TextTrimming="CharacterEllipsis"
+                                                    Text="{Binding LastMessage}">
+                                         </TextBlock>
+                                     </Grid>
+                                    <Popup Placement="Right"
+                                           VerticalOffset="-30"
+                                           AllowsTransparency="True"
+                                           StaysOpen="True"
+                                           PlacementTarget="{Binding ElementName=xUser}">
+                                        <Popup.Style>
+                                            <Style TargetType="{x:Type Popup}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding PlacementTarget.IsMouseOver, 
+                                                                           RelativeSource={RelativeSource Self}}" 
+                                                                 Value="True">
+                                                        <Setter Property="IsOpen" Value="True" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Popup.Style>
+                                        <local:CProfile></local:CProfile>
+                                    </Popup>
+                                </Grid>
+                            </Border>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -133,10 +126,9 @@
              ItemContainerStyle="{StaticResource xUserContactCardStyle}">
         <ListBox.Template>
             <ControlTemplate>
-                    <StackPanel>
+                <StackPanel>
                     <ItemsPresenter></ItemsPresenter>
-                    </StackPanel>
-      
+                </StackPanel>
             </ControlTemplate>
         </ListBox.Template>
     </ListBox>
