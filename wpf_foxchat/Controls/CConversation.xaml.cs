@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,18 +44,15 @@ namespace wpf_foxchat.Controls
                 .Where(p => p.IsOpen);
         }
 
-        //private void ConverstaionScollChanged(object sender, ScrollChangedEventArgs e)
-        //{
-        //    ScrollViewer scrollview = sender as ScrollViewer;
 
-        //    var popUpOpened = GetOpenPopups();
-        //    foreach (Popup pop in popUpOpened)
-        //    {
-        //        if(pop.Name == "POPUP_React")
-        //        {
-        //            pop.VerticalOffset -= scrollview.VerticalOffset;
-        //        }
-        //    }
-        //}
+        public IEnumerable ItemsSource
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemsSourceProperty =
+                              DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(CConversation), new PropertyMetadata(null));
+
     }
 }

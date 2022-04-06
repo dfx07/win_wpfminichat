@@ -3,7 +3,7 @@
     //=========================================================================
     // Chứa thông tin thông tin cá nhân giao tiếp trong nhóm chat
     //=========================================================================
-    public class UserContactCard
+    public class UserContactItem
     {
         public string ID            { get; set; } // Định danh người dùng
         public string UserName      { get; set; } // Tên người dùng
@@ -12,7 +12,7 @@
         public bool   Seen          { get; set; } // Đã đọc tin nhắn cuối cùng hay chưa
         public string ImageLink     { get; set; } // Đường dẫn hình ảnh người dùng
 
-        public UserContactCard()
+        public UserContactItem()
         {
             ID          = "";
             UserName    = "Không rõ";

@@ -250,6 +250,7 @@
                         <DockPanel x:Name="xDockPanel_ContentChat" LastChildFill="True" >
                             <!--========================== Chat bar ==========================-->
                             <Grid  x:Name="xGrid_ContentChat_ChatBar"
+                                   Margin="0,0,5,0"
                                    Height="35"
                                    DockPanel.Dock="Bottom" 
                                    VerticalAlignment="Stretch" 
@@ -261,58 +262,50 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!--Cụm này hiển thị thanh chat message-->
-
-                                <TextBlock x:Name="LabelPlaceHolderMessage" 
-                                   Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   Padding="10"
-                                   Text="Write a message..."
-                                   Background="Bisque">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Foreground" Value="Transparent"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=TextBoxMessage,Path=Text}" Value="">
-                                                    <Setter Property="Foreground" Value="Gray"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-
-                                <TextBox Name="TextBoxMessage" 
-                                     Grid.Column="0"
-                                     Grid.ColumnSpan="2"
-                                     BorderThickness="0"
-                                     Margin="-3,0,0,0"
-                                     Padding="10"
-                                     Background="Transparent"
-                                     HorizontalAlignment="Stretch"
-                                     Foreground="Black"
-                                     VerticalAlignment="Stretch"
-                                     VerticalContentAlignment="Center">
+                                <TextBox Background="Transparent"
+                                         Foreground="Transparent"
+                                         Grid.Column="0" Grid.ColumnSpan="2"
+                                         Text="{Binding Path=Text ,ElementName=xTextSendMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <TextBox.InputBindings >
+                                        <KeyBinding Key="Return" Command="{Binding CmdSendMessage}"/>
+                                    </TextBox.InputBindings>
                                 </TextBox>
+                                <ctrl:CTextBox x:Name="xTextSendMessage"
+                                               DataContext="{Binding TBX_SendMessage}"
+                                               Style="{StaticResource CTextBoxVMStyle}"
+                                               BorderThickness="1"
+                                               Background="Wheat"
+                                               BorderBrush="LightSalmon"
+                                               BorderRadius="0"
+                                               Placeholder="Write to text..."
+                                               KeyDown="CTBX_TextSend_KeyDown"
+                                               Grid.Column="0" Grid.ColumnSpan="2">
+                                </ctrl:CTextBox>
+
 
                                 <Button Grid.Column="1" 
-                                    Style="{StaticResource ButtonChangeHover}"
-                                    Height="15"
-                                    Width ="18"
-                                    BorderThickness="0"
-                                    Background="Transparent"
-                                    Content="&#xf0c1;">
+                                        Style="{StaticResource ButtonChangeHover}"
+                                        Height="15"
+                                        Width ="18"
+                                        BorderThickness="0"
+                                        Background="Transparent"
+                                        Content="&#xf0c1;">
                                 </Button>
-                                <ctrl:CButton Grid.Column="2"
-                                    FontFamily="{StaticResource FontAwesome}"
-                                    Content="&#xf1d8;"
-                                    VerticalContentAlignment="Center"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch">
+                                <ctrl:CButton x:Name="xSendMessage"
+                                              Grid.Column="2"
+                                              FontFamily="{StaticResource FontAwesome}"
+                                              Content="&#xf1d8;"
+                                              VerticalContentAlignment="Center"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              Command="{Binding CmdSendMessage}">
                                 </ctrl:CButton>
                             </Grid>
                             <!--====================== Chanel Title Bar ======================-->
                             <Border x:Name="xBorder_ContentChat_TitleBar"
+                                    Margin="0,0,5,0"
                                     DockPanel.Dock="Top"
-                                    CornerRadius="0,0,2,2"
+                                    CornerRadius="0,0,4,2"
                                     Height="38"
                                     Opacity="0.98"
                                     Background="#2E3033">
@@ -404,10 +397,14 @@
                             <Grid  x:Name="xGrid_ContentChat_Conversation"
                                    Margin="0,0,5,0"
                                    Background="WhiteSmoke">
-                                <ScrollViewer Style="{StaticResource CScrollViewer}"
+                                <ScrollViewer x:Name="xSCW_Conversation" 
+                                              Style="{StaticResource CScrollViewer}"
                                               Margin="0,0,-2,0"
                                               ScrollChanged="CScrollViewer_ScrollChanged">
-                                    <ctrl:CConversation  BorderThickness="0"/>
+                                    <ctrl:CConversation ItemsSource="{Binding Messages, Mode=TwoWay,
+                                                        UpdateSourceTrigger=PropertyChanged}" 
+                                                        BorderThickness="0">
+                                    </ctrl:CConversation>
                                 </ScrollViewer>
                             </Grid>
                         </DockPanel>

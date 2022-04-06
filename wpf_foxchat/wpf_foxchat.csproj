@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TestControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\CAnimation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\CScrollBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CTextBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,6 +147,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Com\ComCtrl.cs" />
+    <Compile Include="Com\Definer.cs" />
     <Compile Include="Controllers\MainViewController.cs" />
     <Compile Include="Controls\CConversation.xaml.cs">
       <DependentUpon>CConversation.xaml</DependentUpon>
@@ -146,13 +156,18 @@
     <Compile Include="Controls\CMessageBox.xaml.cs">
       <DependentUpon>CMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Com\CButton.cs" />
-    <Compile Include="Controls\Com\PControl.cs" />
+    <Compile Include="Controls\BaseControls\CButton.cs" />
+    <Compile Include="Controls\BaseControls\CTextBox.cs" />
+    <Compile Include="Controls\BaseControls\PControl.cs" />
     <Compile Include="Controls\CUserContactCard.xaml.cs">
       <DependentUpon>CUserContactCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TestControl.xaml.cs">
+      <DependentUpon>TestControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Message.cs" />
+    <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\UserContact.cs" />
-    <Compile Include="ViewModels\BaseControl.cs" />
     <Compile Include="Controls\CProfileInfo.xaml.cs">
       <DependentUpon>CProfileInfo.xaml</DependentUpon>
     </Compile>
@@ -169,9 +184,9 @@
       <DependentUpon>CWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Messages.cs" />
-    <Compile Include="Controls\Com\Utils.cs" />
+    <Compile Include="Com\Utils.cs" />
+    <Compile Include="Services\DataConversion.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Enum.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />

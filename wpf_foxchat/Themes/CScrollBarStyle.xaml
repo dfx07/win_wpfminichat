@@ -86,12 +86,11 @@
                                                 Grid.Column="0" Grid.ColumnSpan="2"
                                                 Grid.Row="0" Grid.RowSpan="2">
                         </ScrollContentPresenter>
-
                         <ScrollBar x:Name="PART_VerticalScrollBar"
                                    Grid.Column="1" Grid.Row="0"
                                    Padding="0,0,0,0"
-                                   Margin="{TemplateBinding Margin}"
                                    Style="{StaticResource CScrollBar}"
+                                   Margin="{TemplateBinding Margin}"
                                    Value="{TemplateBinding VerticalOffset}"
                                    Maximum="{TemplateBinding ScrollableHeight}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
@@ -112,7 +111,7 @@
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="ScrollChanged">
                             <BeginStoryboard x:Name="AniScrollChanged">
-                                <Storyboard >
+                                <Storyboard>
                                     <DoubleAnimation  Storyboard.TargetName="PART_VerticalScrollBar" 
                                                       Storyboard.TargetProperty="Opacity"
                                                       From="1.0" To="0.0" Duration="0:0:2.5" AutoReverse="False">

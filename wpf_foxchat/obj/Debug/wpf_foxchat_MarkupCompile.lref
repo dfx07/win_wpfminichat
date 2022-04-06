@@ -8,16 +8,17 @@ FG:\win_wpfminichat\wpf_foxchat\Controls\CReaction.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CReactionStatistical.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CUserContactCard.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Controls\CWindow.xaml;;
+FG:\win_wpfminichat\wpf_foxchat\Controls\TestControl.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\CAnimation.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\CButtonStyle.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\CMessageStyle.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\ControlBidding.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\CScrollBarStyle.xaml;;
+FG:\win_wpfminichat\wpf_foxchat\Themes\CTextBoxStyle.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\FontStyle.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\FoxChatStyle.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\GeometryData.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Themes\ImageResource.xaml;;
-FG:\win_wpfminichat\wpf_foxchat\Themes\InputStyle.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Views\Bubble.xaml;;
 FG:\win_wpfminichat\wpf_foxchat\Views\MainChat.xaml;;
 

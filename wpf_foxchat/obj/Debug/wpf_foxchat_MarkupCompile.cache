@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 G:\win_wpfminichat\wpf_foxchat\App.xaml
-201834083487
+2258642375
 1-968641752
-26-773790250
+291124667410
 13738642453
-Controls\CConversation.xaml;Controls\CMessageBox.xaml;Controls\CProfileInfo.xaml;Controls\CProfile.xaml;Controls\CReaction.xaml;Controls\CReactionStatistical.xaml;Controls\CUserContactCard.xaml;Controls\CWindow.xaml;Themes\CAnimation.xaml;Themes\CButtonStyle.xaml;Themes\CMessageStyle.xaml;Themes\ControlBidding.xaml;Themes\CScrollBarStyle.xaml;Themes\FontStyle.xaml;Themes\FoxChatStyle.xaml;Themes\GeometryData.xaml;Themes\ImageResource.xaml;Themes\InputStyle.xaml;Views\Bubble.xaml;Views\MainChat.xaml;
+Controls\CConversation.xaml;Controls\CMessageBox.xaml;Controls\CProfileInfo.xaml;Controls\CProfile.xaml;Controls\CReaction.xaml;Controls\CReactionStatistical.xaml;Controls\CUserContactCard.xaml;Controls\CWindow.xaml;Controls\TestControl.xaml;Themes\CAnimation.xaml;Themes\CButtonStyle.xaml;Themes\CMessageStyle.xaml;Themes\ControlBidding.xaml;Themes\CScrollBarStyle.xaml;Themes\CTextBoxStyle.xaml;Themes\FontStyle.xaml;Themes\FoxChatStyle.xaml;Themes\GeometryData.xaml;Themes\ImageResource.xaml;Themes\InputStyle.xaml;Views\Bubble.xaml;Views\MainChat.xaml;
 
 False
 

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using wpf_foxchat.ViewModels;
+using wpf_foxchat.Com;
 
 namespace wpf_foxchat.Controls
 {
@@ -7,7 +7,7 @@ namespace wpf_foxchat.Controls
     // Class : CommonControl                                                    
     // Các control sẽ có các thuộc tính chung này                               
     //==========================================================================
-    public class CommonControl : BaseControl
+    public class CommonControl : BindableBase
     {
         public CommonControl()
         {
@@ -64,6 +64,17 @@ namespace wpf_foxchat.Controls
             {
                 _Focus = value;
                 RaisePropertyChanged("Focus");
+            }
+        }
+
+        private string _Text;         // String control 
+        public string Text
+        {
+            get { return _Text; }
+            set
+            {
+                _Text = value;
+                RaisePropertyChanged("Text");
             }
         }
     }

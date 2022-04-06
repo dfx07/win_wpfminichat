@@ -102,7 +102,7 @@
 
     <!--Phần cấu trúc chính-->
     <ListBox Style="{StaticResource ReactionStatisticalStyle}"
-             Margin="0,-5,0,-5"
+             Margin="0,-13,0,-13"
              BorderThickness="0"
              ItemsSource="{Binding Reaction}">
     </ListBox>

@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using wpf_foxchat.Controls;
+using wpf_foxchat.Com;
+using wpf_foxchat.ViewModels;
 
 namespace wpf_foxchat
 {
@@ -49,11 +39,19 @@ namespace wpf_foxchat
         {
             DefaultSetting();
             InitializeComponent();
+            Loaded += new RoutedEventHandler(MainChat_Loaded);
         }
 
         private void DefaultSetting()
         {
             //VisiblePopupDialog = Visibility.Collapsed;
+        }
+
+        private void MainChat_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainViewModel model = DataContext as MainViewModel;
+            model.SCW_Conversation = xSCW_Conversation;
+            xSCW_Conversation.ScrollToBottom();
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -215,14 +213,17 @@ namespace wpf_foxchat
         private void CScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             ScrollViewer scrollViewer = sender as ScrollViewer;
+            scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
             if (e.VerticalChange == 0)
             {
                 scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
             }
-            else
-            {
-                scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
-            }
+        }
+
+        private void CTBX_TextSend_KeyDown(object sender, KeyEventArgs e)
+        {
+            MainViewModel model = DataContext as MainViewModel;
+            model.CTBX_TextSend_KeyDown(sender, e);
         }
     }
 }

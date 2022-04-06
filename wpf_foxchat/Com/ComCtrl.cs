@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 
-namespace wpf_foxchat.ViewModels
+namespace wpf_foxchat.Com
 {
     // =========================================================================== //
     // ========================= RaiseProperty Control =========================== //
     // =========================================================================== //
 
-    public abstract class BaseControl : INotifyPropertyChanged
+    public abstract class BindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

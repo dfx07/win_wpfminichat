@@ -1,11 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using wpf_foxchat.Controllers;
+using wpf_foxchat.Com;
 using wpf_foxchat.Controls;
+using wpf_foxchat.Controllers;
 
 namespace wpf_foxchat.ViewModels
 {
-    public abstract class BaseViewModel : BaseControl
+    public abstract class BaseViewModel : BindableBase
     {
         private Controller      m_pCtrl;
         private CWindow         m_Window;

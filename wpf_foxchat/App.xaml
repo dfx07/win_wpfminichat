@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Themes/FoxChatStyle.xaml"/>
                 <ResourceDictionary Source="Themes/CAnimation.xaml"/>
                 <ResourceDictionary Source="Themes/CButtonStyle.xaml"/>
+                <ResourceDictionary Source="Themes/CTextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Themes/ControlBidding.xaml"/>
                 <ResourceDictionary Source="Themes/CMessageStyle.xaml"/>
                 <ResourceDictionary Source="Themes/ImageResource.xaml"/>

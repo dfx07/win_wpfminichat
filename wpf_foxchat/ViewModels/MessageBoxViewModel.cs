@@ -1,7 +1,7 @@
 ﻿using System.Windows;
+using wpf_foxchat.Com;
 using wpf_foxchat.Controllers;
 using wpf_foxchat.Controls;
-using static wpf_foxchat.Controls.CMessageBox;
 
 namespace wpf_foxchat.ViewModels
 {
