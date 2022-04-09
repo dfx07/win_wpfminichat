@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using wpf_foxchat.Com;
 using wpf_foxchat.Controllers;
 using wpf_foxchat.Controls;
 using wpf_foxchat.Database;
@@ -13,11 +14,6 @@ using wpf_foxchat.Services;
 
 namespace wpf_foxchat.ViewModels
 {
-    enum MessageStatus
-    {
-        Send,
-        Received
-    }
 
     enum ResponseStatus
     {
@@ -27,7 +23,6 @@ namespace wpf_foxchat.ViewModels
 
     public class MainViewModel : BaseViewModel
     {
-
         public TextBoxVM    TBX_SendMessage  { set; get; }
         public ScrollViewer SCW_Conversation { set; get; }
 
@@ -45,19 +40,25 @@ namespace wpf_foxchat.ViewModels
 
         public override bool OnInitData()
         {
+
+            // Thiết lập thông tin về người dùng
+            UserInfo User = new UserInfo() { ID = "1", Name ="Ngô Văn Thường", UserName ="Thuong.NV" } ;
+            Session.SetUser(User);
+
+
             Messages = new ObservableCollection<MessageItem>
             {
-                new MessageItem() {Message="Tin nhắn thứ nhất cua fasdffffffffffffffffffffffffffffffffffffffasdfffffffffffffffffffffffffffffffffffffffff ", MessageStatus="Sent"    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của khác hàng đây", MessageStatus="Received",MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , MessageStatus="Sent"    ,MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , MessageStatus="Sent"    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của khác hàng đây", MessageStatus="Received",MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , MessageStatus="Sent"    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , MessageStatus="Received",MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , MessageStatus="Received",MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , MessageStatus="Received",MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , MessageStatus="Sent"    ,MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , MessageStatus="Sent"    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua fasdffffffffffffffffffffffffffffffffffffffasdfffffffffffffffffffffffffffffffffffffffff ", Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn của khác hàng đây", Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = false },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn của khác hàng đây", Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = false },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = false },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = false },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
             };
 
             UserContactCardList = new ObservableCollection<UserContactItem>
@@ -78,6 +79,7 @@ namespace wpf_foxchat.ViewModels
                 new UserContactItem() { ID="0009", UserName ="Trần Đình Hùng"   , Seen= true , IsActive = true , LastMessage= "Thằng chuyên nói : tôi biết rồi", ImageLink="" },
             };
 
+
             return true;
         }
 
@@ -94,18 +96,18 @@ namespace wpf_foxchat.ViewModels
 
             // Thiết lập thông tin Msg Item khi SEND
             MsgItem.MessageTime          = DateTime.Now.ToString("HH:mm:ss tt");
-            MsgItem.MessageStatus        = "Sent";
+            MsgItem.Status               = MessageStatus.Sent;
             MsgItem.ShowImageUserMessage = true;
             MsgItem.Message              = msg;
 
             MessageItem LastMsgItem = Messages.LastOrDefault();
-            if (LastMsgItem != null && LastMsgItem.MessageStatus == "Sent")
+            if (LastMsgItem != null && LastMsgItem.Status == MessageStatus.Sent)
             {
                 LastMsgItem.ShowImageUserMessage = false;
-                LastMsgItem.Reaction[0].ReactionCount++;
-                LastMsgItem.Reaction[1].ReactionCount++;
-                LastMsgItem.Reaction[2].ReactionCount++;
-                LastMsgItem.Reaction[3].ReactionCount++;
+                LastMsgItem.AddReaction(ReactionType.Like, 1);
+                LastMsgItem.AddReaction(ReactionType.Haha, 1);
+                LastMsgItem.AddReaction(ReactionType.Love, 1);
+                LastMsgItem.AddReaction(ReactionType.Wow , 1);
             }
             return MsgItem;
         }
@@ -148,39 +150,25 @@ namespace wpf_foxchat.ViewModels
             }
         }
 
-        //==================================================================================
-        // Lấy format chuỗi thời gian một thời điểm so với hiện tại                         
-        //==================================================================================
-        public string ConvertDT2StrCMPNow(DateTime dTime)
+        public List<Message> GetMoreMessage(int MsgIDStart)
         {
-            string strDataTime = "";
-            DateTime dTimeNow = DateTime.Now;
-            double   diffDay  = (dTimeNow - dTime).TotalDays;
+            List<Message> PreMsgList = new List<Message>();
 
-            // Tin nhắn trong ngày 
-            if (diffDay < 1)
-            {
-                strDataTime = dTime.ToString("HH:mm tt");
-            }
-            // Tin nhắn trong một năm
-            else if (dTime.Year == dTimeNow.Year)
-            {
-                strDataTime = dTime.ToString("HH:mm tt ddd, dd MMM");
-            }
-            // Tin nhắn khác năm
-            else
-            {
-                strDataTime = dTime.ToString("HH:mm tt ddd, dd MMM y");
-            }
+            PreMsgList.Add(new Message() { ID = 1, IDUser = "0001", Text="CC" , nHaha = 2 });
+            PreMsgList.Add(new Message() { ID = 2, IDUser = "0002", Text="CC2", nLike = 2 });
+            PreMsgList.Add(new Message() { ID = 3, IDUser = "0003", Text="CC3", nHaha = 2 });
 
-            return strDataTime;
+
+            return PreMsgList;
         }
 
-        public void AppendHeadMessage(List<Message> MsgList)
+        public void OnLoadMoreMessage()
         {
-            List<MessageItem> MsgItemList = DataConversion.ConvertDataMessage(MsgList);
+            List<Message> PreMsg = GetMoreMessage(Messages[0].ID);
 
-            //Messages.Insert(0, MsgItemList);
+            List<MessageItem> PreMsgItem = DataConversion.ConvertDataMessage(PreMsg);
+
+            Messages.(PreMsgItem);
         }
 
 

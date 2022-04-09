@@ -5,8 +5,18 @@
         DLG_MESSAGE_BOX,
     }
 
-
-    class Enum
+    public enum ReactionType
     {
+        Like ,  // Like
+        Haha ,  // Haha
+        Love ,  // Love
+        Wow  ,  // Wow
+        Sad  ,  // Sad
+    }
+
+    public enum MessageStatus
+    {
+        Sent,    // Gửi
+        Received,// Nhận
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:com="clr-namespace:wpf_foxchat.Com"
              xmlns:local="clr-namespace:wpf_foxchat.Controls"
              mc:Ignorable="d" 
              Width="Auto" Height="Auto">
@@ -16,7 +17,7 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <!--Thời gian sẽ căn gần lề-->
             <Style.Triggers>
-                <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ShowImageUserMessage}" Value="False">
@@ -75,7 +76,7 @@
                                         <Setter Property="HorizontalAlignment" Value="Left"/>
                                         <Setter Property="FlowDirection" Value="LeftToRight"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                 <Setter Property="HorizontalAlignment" Value="Right"/>
                                                 <Setter Property="FlowDirection" Value="RightToLeft"/>
                                             </DataTrigger>
@@ -114,7 +115,7 @@
                                             <Setter Property="HorizontalAlignment" Value="Left"/>
                                             <Setter Property="Background" Value="Transparent"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                     <Setter Property="HorizontalAlignment" Value="Right"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -134,7 +135,7 @@
                                             <Style TargetType="{x:Type StackPanel}">
                                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                    <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                         <Setter Property="FlowDirection" Value="RightToLeft"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
@@ -160,7 +161,7 @@
                                                             <DataTrigger Binding="{Binding Path=ShowImageUserMessage}" Value="False">
                                                                 <Setter Property="Visibility" Value="Collapsed" />
                                                             </DataTrigger>
-                                                            <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                                 <Setter Property="Fill" Value="{StaticResource MesseageReceiveColor}"/>
                                                                 <Setter Property="RenderTransform">
                                                                     <Setter.Value>
@@ -184,7 +185,7 @@
                                                     <Style TargetType="{x:Type Border}">
                                                         <Setter Property="Background" Value="{StaticResource MesseageSentColor}"/>
                                                         <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                                 <Setter Property="Background" Value="{StaticResource MesseageReceiveColor}"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
@@ -195,7 +196,7 @@
                                                         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CMessageStyle}">
                                                             <Setter Property="Foreground" Value="{StaticResource TextSentColor}"/>
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                                     <Setter Property="Foreground" Value="{StaticResource TextReceiveColor}"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
@@ -212,7 +213,7 @@
                                                     <Setter Property="Visibility"    Value="Hidden"/>
                                                     <Setter Property="FlowDirection" Value="RightToLeft"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                             <Setter Property="FlowDirection" Value="LeftToRight"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Path=IsMouseOver,
@@ -246,7 +247,7 @@
                                                         <Style TargetType="{x:Type Popup}">
                                                             <Setter Property="HorizontalOffset" Value="-30"/>
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                                     <Setter Property="HorizontalOffset" Value="10"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
@@ -265,7 +266,7 @@
                                                 <Style TargetType="{x:Type DockPanel}">
                                                     <Setter Property="FlowDirection" Value="LeftToRight"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                             <Setter Property="FlowDirection" Value="RightToLeft"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
@@ -280,7 +281,7 @@
                                                     <Style TargetType="{x:Type StackPanel}">
                                                         <Setter Property="FlowDirection" Value="RightToLeft"/>
                                                         <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding MessageStatus}" Value="Received">
+                                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
                                                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
@@ -288,7 +289,10 @@
                                                 </StackPanel.Style>
 
                                                 <!--Phần số lượng reaction-->
-                                                <local:CReactionStatiscal></local:CReactionStatiscal>
+                                                <local:CReactionStatiscal ItemsSource="{Binding Path=Reactions, 
+                                                                                                Mode=TwoWay,
+                                                                                                UpdateSourceTrigger=PropertyChanged}" >
+                                                </local:CReactionStatiscal>
                                             </StackPanel>
                                         </DockPanel>
                                     </Grid>

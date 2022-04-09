@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:com="clr-namespace:wpf_foxchat.Com"
              xmlns:local="clr-namespace:wpf_foxchat.Controls"
              mc:Ignorable="d" 
              Height="Auto" Width="Auto">
@@ -29,7 +30,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding ReactionCount}" Value="0">
+                            <DataTrigger Binding="{Binding Count}" Value="0">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </ControlTemplate.Triggers>
@@ -45,19 +46,19 @@
                                     <Image.Style>
                                         <Style TargetType="{x:Type Image}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ReactionType}"  Value="0">
+                                                <DataTrigger Binding="{Binding Type}"  Value="{x:Static com:ReactionType.Like}">
                                                     <Setter Property="Source" Value="{StaticResource Like_React_Source}"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ReactionType}"  Value="1">
+                                                <DataTrigger Binding="{Binding Type}"  Value="{x:Static com:ReactionType.Haha}">
                                                     <Setter Property="Source" Value="{StaticResource Haha_React_Source}"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ReactionType}"  Value="2">
+                                                <DataTrigger Binding="{Binding Type}"  Value="{x:Static com:ReactionType.Love}">
                                                     <Setter Property="Source" Value="{StaticResource Love_React_Source}"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ReactionType}"  Value="3">
+                                                <DataTrigger Binding="{Binding Type}"  Value="{x:Static com:ReactionType.Wow}">
                                                     <Setter Property="Source" Value="{StaticResource Wow_React_Source}"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding ReactionType}"  Value="4">
+                                                <DataTrigger Binding="{Binding Type}"  Value="{x:Static com:ReactionType.Sad}">
                                                     <Setter Property="Source" Value="{StaticResource Sad_React_Source}"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -66,7 +67,7 @@
                                 </Image>
                                 <TextBlock Grid.Column="1"
                                            Style="{StaticResource TextReactionStatisticalStyle}"
-                                           Text="{Binding ReactionCount}">
+                                           Text="{Binding Count}">
                                 </TextBlock>
                             </Grid>
                         </Border>
@@ -104,6 +105,8 @@
     <ListBox Style="{StaticResource ReactionStatisticalStyle}"
              Margin="0,-13,0,-13"
              BorderThickness="0"
-             ItemsSource="{Binding Reaction}">
+             ItemsSource="{Binding Path=ItemsSource,
+                                   RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CReactionStatiscal}},
+                                   Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
     </ListBox>
 </UserControl>
