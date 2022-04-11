@@ -34,18 +34,19 @@ namespace wpf_foxchat.Models
     public class MessageItem : ModelBase
     {
         public  int           ID                    { get; set; } // ID tin nhắn trong kênh
+        public  string        IDUser                { get; set; } // ID người nhắn tin
         public  string        Message               { get; set; } // Nội dung tin nhắn
         public  MessageStatus Status                { get; set; } // Trạng thái : Gửi / Nhận
-        public  string        MessageTime           { get; set; } // Thời gian gửi tin
+        public  string        Time                  { get; set; } // Thời gian gửi tin
 
-        private bool   _ShowImageUserMessage { get; set; } // Hiển thị hình ảnh hay không : 1 : có | 0 :không
-        public  bool   ShowImageUserMessage
+        private bool   _ShowImageUser               { get; set; } // Hiển thị hình ảnh hay không : 1 : có | 0 :không
+        public  bool   ShowImageUser
         {
-            get { return _ShowImageUserMessage; }
+            get { return _ShowImageUser; }
             set
             {
-                _ShowImageUserMessage = value;
-                RaisePropertyChanged("ShowImageUserMessage");
+                _ShowImageUser = value;
+                RaisePropertyChanged("ShowImageUser");
             }
         }
 

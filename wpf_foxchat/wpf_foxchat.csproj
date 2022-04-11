@@ -187,6 +187,7 @@
     <Compile Include="Com\Utils.cs" />
     <Compile Include="Services\DataConversion.cs" />
     <Compile Include="Database\Session.cs" />
+    <Compile Include="Services\ServerAPI.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />

@@ -6,6 +6,7 @@ namespace wpf_foxchat.Database
     {
         public int      ID;
         public string   IDUser;
+        public bool     ShowImgUser;
 
         public DateTime Time;
         public string   Text;
@@ -17,12 +18,13 @@ namespace wpf_foxchat.Database
 
         public Message(string _Text = "")
         {
-            ID     = 0;
-            IDUser = "None";
-            Time   = new DateTime();
-            Text   = _Text;
-            nLike  = nLove = nWow = 0;
-            nHaha  = nSad = 0;
+            ID          = 0;
+            IDUser      = "None";
+            ShowImgUser = true;
+            Time        = new DateTime();
+            Text        = _Text;
+            nLike       = nLove = nWow = 0;
+            nHaha       = nSad = 0;
         }
     }
 

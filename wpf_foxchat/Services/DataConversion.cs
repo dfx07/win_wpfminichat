@@ -39,40 +39,47 @@ namespace wpf_foxchat.Services
 
     public static class DataConversion
     {
-
-        // Chuyển đổi dữ liệu từ DataBase -> DataUI
-        public static List<MessageItem> ConvertDataMessage(List<Message> MsgList)
+        public static MessageItem ConvertDataMessage(Message Msg)
         {
             UserInfo user = Session.GetUser();
+
+            MessageItem MsgItem = new MessageItem();
+
+            MsgItem.ID             = Msg.ID;
+            MsgItem.IDUser         = Msg.IDUser;
+            MsgItem.Message        = Msg.Text;
+            MsgItem.ShowImageUser  = Msg.ShowImgUser;
+            MsgItem.Time           = Conversion.DT2StrCMPNow(Msg.Time);
+
+            // Thiết lập tin nhắn là gửi hay nhận
+            if (user.ID == Msg.IDUser)
+            {
+                MsgItem.Status = MessageStatus.Sent;
+            }
+            else
+            {
+                MsgItem.Status = MessageStatus.Received;
+            }
+
+            // Thiết lập thông tin về reaction
+            if (Msg.nLike > 0) MsgItem.AddReaction(ReactionType.Like, Msg.nLike);
+            if (Msg.nHaha > 0) MsgItem.AddReaction(ReactionType.Haha, Msg.nHaha);
+            if (Msg.nLove > 0) MsgItem.AddReaction(ReactionType.Love, Msg.nLove);
+            if (Msg.nSad  > 0) MsgItem.AddReaction(ReactionType.Sad , Msg.nSad) ;
+            if (Msg.nWow  > 0) MsgItem.AddReaction(ReactionType.Wow , Msg.nWow) ;
+
+            return MsgItem;
+        }
+
+        // Chuyển đổi list dữ liệu Message từ DataBase -> DataUI
+        public static List<MessageItem> ConvertListDataMessage(List<Message> MsgList)
+        {
             List<MessageItem> MsgItemList = new List<MessageItem>();
 
             for (int i = 0; i < MsgList.Count ; i ++)
             {
                 Message     Msg     = MsgList[i];
-                MessageItem MsgItem = new MessageItem();
-
-                MsgItem.ID             = Msg.ID;
-                MsgItem.Message        = Msg.Text;
-                MsgItem.MessageTime    = Conversion.DT2StrCMPNow(Msg.Time);
-
-
-                // Thiết lập tin nhắn là gửi hay nhận
-                if (user.ID == Msg.IDUser)
-                {
-                    MsgItem.Status = MessageStatus.Sent;
-                }
-                else
-                {
-                    MsgItem.Status = MessageStatus.Received;
-                }
-
-                // Thiết lập thông tin về reaction
-                if (Msg.nLike > 0) MsgItem.AddReaction(ReactionType.Like, Msg.nLike);
-                if (Msg.nHaha > 0) MsgItem.AddReaction(ReactionType.Haha, Msg.nHaha);
-                if (Msg.nLove > 0) MsgItem.AddReaction(ReactionType.Love, Msg.nLove);
-                if (Msg.nSad  > 0) MsgItem.AddReaction(ReactionType.Sad , Msg.nSad) ;
-                if (Msg.nWow  > 0) MsgItem.AddReaction(ReactionType.Wow , Msg.nWow) ;
-
+                MessageItem MsgItem = ConvertDataMessage(Msg);
                 MsgItemList.Add(MsgItem);
             }
             return MsgItemList;

@@ -48,17 +48,17 @@ namespace wpf_foxchat.ViewModels
 
             Messages = new ObservableCollection<MessageItem>
             {
-                new MessageItem() {Message="Tin nhắn thứ nhất cua fasdffffffffffffffffffffffffffffffffffffffasdfffffffffffffffffffffffffffffffffffffffff ", Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của khác hàng đây", Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của khác hàng đây", Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Received,MessageTime="03/01/2022",ShowImageUserMessage = true },
-                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = false },
-                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Sent    ,MessageTime="03/01/2022",ShowImageUserMessage = true },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua fasdffffffffffffffffffffffffffffffffffffffasdfffffffffffffffffffffffffffffffffffffffff ", Status=MessageStatus.Sent    ,Time="03/01/2022",ShowImageUser = true },
+                new MessageItem() {Message="Tin nhắn của khác hàng đây", Status=MessageStatus.Received,Time="03/01/2022",ShowImageUser = true },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,Time="03/01/2022",ShowImageUser = false },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Sent    ,Time="03/01/2022",ShowImageUser = true },
+                new MessageItem() {Message="Tin nhắn của khác hàng đây", Status=MessageStatus.Received,Time="03/01/2022",ShowImageUser = true },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,Time="03/01/2022",ShowImageUser = true },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Received,Time="03/01/2022",ShowImageUser = false },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Received,Time="03/01/2022",ShowImageUser = false },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Received,Time="03/01/2022",ShowImageUser = true },
+                new MessageItem() {Message="Tin nhắn của tối tiếp"     , Status=MessageStatus.Sent    ,Time="03/01/2022",ShowImageUser = false },
+                new MessageItem() {Message="Tin nhắn thứ nhất cua toi" , Status=MessageStatus.Sent    ,Time="03/01/2022",ShowImageUser = true },
             };
 
             UserContactCardList = new ObservableCollection<UserContactItem>
@@ -95,15 +95,15 @@ namespace wpf_foxchat.ViewModels
             MessageItem MsgItem = new MessageItem();
 
             // Thiết lập thông tin Msg Item khi SEND
-            MsgItem.MessageTime          = DateTime.Now.ToString("HH:mm:ss tt");
-            MsgItem.Status               = MessageStatus.Sent;
-            MsgItem.ShowImageUserMessage = true;
-            MsgItem.Message              = msg;
+            MsgItem.Time            = DateTime.Now.ToString("HH:mm:ss tt");
+            MsgItem.Status          = MessageStatus.Sent;
+            MsgItem.ShowImageUser   = true;
+            MsgItem.Message         = msg;
 
             MessageItem LastMsgItem = Messages.LastOrDefault();
             if (LastMsgItem != null && LastMsgItem.Status == MessageStatus.Sent)
             {
-                LastMsgItem.ShowImageUserMessage = false;
+                LastMsgItem.ShowImageUser = false;
                 LastMsgItem.AddReaction(ReactionType.Like, 1);
                 LastMsgItem.AddReaction(ReactionType.Haha, 1);
                 LastMsgItem.AddReaction(ReactionType.Love, 1);
@@ -150,27 +150,22 @@ namespace wpf_foxchat.ViewModels
             }
         }
 
-        public List<Message> GetMoreMessage(int MsgIDStart)
-        {
-            List<Message> PreMsgList = new List<Message>();
-
-            PreMsgList.Add(new Message() { ID = 1, IDUser = "0001", Text="CC" , nHaha = 2 });
-            PreMsgList.Add(new Message() { ID = 2, IDUser = "0002", Text="CC2", nLike = 2 });
-            PreMsgList.Add(new Message() { ID = 3, IDUser = "0003", Text="CC3", nHaha = 2 });
 
 
-            return PreMsgList;
-        }
-
+        //==================================================================================
+        // Nhận thêm nhiều tin nhắn trong kênh chat                                         
+        //==================================================================================
         public void OnLoadMoreMessage()
         {
-            List<Message> PreMsg = GetMoreMessage(Messages[0].ID);
+            List<Message> PreMsg = ServerAPI.GetMoreMessage(Messages[0].ID, 3);
 
-            List<MessageItem> PreMsgItem = DataConversion.ConvertDataMessage(PreMsg);
+            List<MessageItem> PreMsgItem = DataConversion.ConvertListDataMessage(PreMsg);
 
-            Messages.(PreMsgItem);
+            for(int i = PreMsgItem.Count - 1; i >= 0; i--)
+            {
+                Messages.Insert(0, PreMsgItem[i]);
+            }
         }
-
 
         //==================================================================================
         // Gửi một thông điệp tại kênh chat hiện tại                                        
@@ -226,6 +221,22 @@ namespace wpf_foxchat.ViewModels
                     _CmdSendMessage = new RelayCommand((param) => OnSendMessage());
                 }
                 return _CmdSendMessage;
+            }
+        }
+
+        /// <summary>
+        /// Command Handle Load more click
+        /// </summary>
+        private RelayCommand _CmdOnLoadMore;
+        public RelayCommand CmdOnLoadMore
+        {
+            get
+            {
+                if (_CmdOnLoadMore == null)
+                {
+                    _CmdOnLoadMore = new RelayCommand((param) => OnLoadMoreMessage());
+                }
+                return _CmdOnLoadMore;
             }
         }
 
