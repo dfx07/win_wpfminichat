@@ -82,7 +82,7 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation To="#FDF4BF"
+                            <ColorAnimation To="Red"
                                         Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)" 
                                         FillBehavior="HoldEnd" Duration="0:0:0" AutoReverse="False" RepeatBehavior="1x"/>
                         </Storyboard>

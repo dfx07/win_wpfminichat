@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-G:\win_wpfminichat\wpf_foxchat\obj\Debug\
+C:\Users\thuong.nv\Desktop\dfx07\win_wpfminichat\wpf_foxchat\obj\Debug\
 wpf_foxchat
 none
 false
 DEBUG;TRACE
-G:\win_wpfminichat\wpf_foxchat\App.xaml
+C:\Users\thuong.nv\Desktop\dfx07\win_wpfminichat\wpf_foxchat\App.xaml
 2258642375
 1-968641752
-371307353200
+37-355748844
 13738642453
 Controls\CConversation.xaml;Controls\CMessageBox.xaml;Controls\CProfileInfo.xaml;Controls\CProfile.xaml;Controls\CReaction.xaml;Controls\CReactionStatistical.xaml;Controls\CUserContactCard.xaml;Controls\CWindow.xaml;Controls\TestControl.xaml;Themes\CAnimation.xaml;Themes\CButtonStyle.xaml;Themes\CMessageStyle.xaml;Themes\ControlBidding.xaml;Themes\CScrollBarStyle.xaml;Themes\CTextBoxStyle.xaml;Themes\FontStyle.xaml;Themes\FoxChatStyle.xaml;Themes\GeometryData.xaml;Themes\ImageResource.xaml;Themes\InputStyle.xaml;Views\Bubble.xaml;Views\MainChat.xaml;
 
-True
+False
 

@@ -13,4 +13,7 @@
 
     <SolidColorBrush  x:Key="TitleBarColor">#242423</SolidColorBrush>
     <SolidColorBrush  x:Key="PanelHoverColor">#FF474A4D</SolidColorBrush>
+
+    <SolidColorBrush  x:Key="ButtonBackgroundHover">#e9ebec</SolidColorBrush>
+    <SolidColorBrush  x:Key="ButtonTextHover">#E1E1E1</SolidColorBrush>
 </ResourceDictionary>

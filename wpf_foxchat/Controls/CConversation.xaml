@@ -63,7 +63,6 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background" Value="Transparent"/>
                                     <Style.Triggers>
-                                        <!--Khi di chuyển vào sẽ đổi màu-->
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#FFECECEC"></Setter>
                                         </Trigger>
@@ -124,96 +123,147 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Grid.Style>
-                                    <!-- =============== Nội dung tin nhắn + Reaction tin nhắn ==================-->
-                                    <Grid x:Name="xGrid_MainMessage" Grid.Row="0" Grid.Column="0">
+                                    <!-- ====================== Nội dung + Reaction + Chức năng ======================-->
+                                    <Grid Grid.Row="0" Grid.Column="0">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*" ></RowDefinition>
                                             <RowDefinition Height="14"></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <!-- ====================== Hiển thị nội dung tin nhắn ====================== -->
-                                        <StackPanel x:Name="xStack_ContentMessage" Grid.Row="0" Grid.Column="0"
-                                                    Grid.RowSpan="2"
-                                                    HorizontalAlignment="Left"
-                                                    Background="Violet"
-                                                    Orientation="Horizontal"
-                                                    VerticalAlignment="Stretch">
-                                            <!--<StackPanel.Style>
-                                                <Style TargetType="{x:Type StackPanel}">
-                                                    <Setter Property="HorizontalAlignment" Value="Right"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                            <Setter Property="HorizontalAlignment" Value="Left"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </StackPanel.Style>-->
+                                        <!-- ========================= Nội dung + Chức năng ==========================-->
+                                        <StackPanel x:Name="xStack_MainMessage" Orientation="Horizontal" Grid.Row="0" Grid.Column="0"
+                                                    Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                            <!-- ====================== Hiển thị nội dung tin nhắn ====================== -->
+                                            <Grid x:Name="xGrid_MainMessage">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="14"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <StackPanel x:Name="xStack_ContentMessage" Grid.Row="0" Grid.Column="0"
+                                                            Grid.RowSpan="2"
+                                                            HorizontalAlignment="Left"
+                                                            Orientation="Horizontal"
+                                                            VerticalAlignment="Stretch">
+                                                    <Grid x:Name="xGrid_ContentMessage">
+                                                        <Path x:Name="xPath_MessageTail" 
+                                                              Data="{StaticResource Geo_MessageTail}" 
+                                                              VerticalAlignment="Bottom"
+                                                              RenderTransformOrigin="0.5,0.5"
+                                                              MinHeight="40" MinWidth="60"
+                                                              Stretch="Uniform">
+                                                            <Path.Style>
+                                                                <Style TargetType="{x:Type Path}">
+                                                                    <Setter Property="Fill" Value="{StaticResource MesseageSentColor}"/>
+                                                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                                                    <Style.Triggers>
+                                                                        <!--Không hiển thị ra cái đuôi-->
+                                                                        <DataTrigger Binding="{Binding Path=ShowImageUser}" Value="False">
+                                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
+                                                                            <Setter Property="Fill" Value="{StaticResource MesseageReceiveColor}"/>
+                                                                            <Setter Property="RenderTransform">
+                                                                                <Setter.Value>
+                                                                                    <ScaleTransform ScaleX="1"/>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Path.Style>
+                                                        </Path>
+                                                        <!--Phần này là phần nội dung tin nhắn-->
+                                                        <Border x:Name="xMessageContent" 
+                                                                Grid.Row="0" Grid.Column="0"
+                                                                CornerRadius="25"
+                                                                MinHeight="20" MinWidth="10"
+                                                                MaxWidth="500">
+                                                            <!--Điều chỉnh màu nền trùng với trạng thái-->
+                                                            <Border.Style>
+                                                                <Style TargetType="{x:Type Border}">
+                                                                    <Setter Property="Background" Value="{StaticResource MesseageSentColor}"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
+                                                                            <Setter Property="Background" Value="{StaticResource MesseageReceiveColor}"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Border.Style>
+                                                            <TextBlock Text="{Binding Message}">
+                                                                <TextBlock.Style>
+                                                                    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CMessageStyle}">
+                                                                        <Setter Property="Foreground" Value="{StaticResource TextSentColor}"/>
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
+                                                                                <Setter Property="Foreground" Value="{StaticResource TextReceiveColor}"/>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </TextBlock.Style>
+                                                            </TextBlock>
+                                                        </Border>
+                                                    </Grid>
+                                                </StackPanel>
+                                           
+                                            </Grid>
+                                            <!-- =========================== Chức năng tin nhắn ========================= -->
+                                            <Grid x:Name="xGrid_FunctionMessage">
+                                                <!--Tính năng chỉ Hover Grid mới hiện thị các button chức năng-->
+                                                <Grid.Style>
+                                                    <Style TargetType="{x:Type Grid}">
+                                                        <Setter Property="Visibility"    Value="Hidden"/>
+                                                        <Setter Property="FlowDirection" Value="RightToLeft"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
+                                                                <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Path=IsMouseOver,
+                                                                             RelativeSource={RelativeSource
+                                                                             AncestorType={x:Type Border}}}"
+                                                                             Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Grid.Style>
 
-                                            <Grid x:Name="xGrid_ContentMessage">
-                                                <Path x:Name="xPath_MessageTail" 
-                                                      Data="{StaticResource Geo_MessageTail}" 
-                                                      VerticalAlignment="Bottom"
-                                                      RenderTransformOrigin="0.5,0.5"
-                                                      MinHeight="40" MinWidth="60"
-                                                      Stretch="Uniform">
-                                                    <Path.Style>
-                                                        <Style TargetType="{x:Type Path}">
-                                                            <Setter Property="Fill" Value="{StaticResource MesseageSentColor}"/>
-                                                            <Setter Property="HorizontalAlignment" Value="Left"/>
-                                                            <Style.Triggers>
-                                                                <!--Không hiển thị ra cái đuôi-->
-                                                                <DataTrigger Binding="{Binding Path=ShowImageUser}" Value="False">
-                                                                    <Setter Property="Visibility" Value="Collapsed" />
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                                    <Setter Property="Fill" Value="{StaticResource MesseageReceiveColor}"/>
-                                                                    <Setter Property="RenderTransform">
-                                                                        <Setter.Value>
-                                                                            <ScaleTransform ScaleX="1"/>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Path.Style>
-                                                </Path>
-                                                <!--Phần này là phần nội dung tin nhắn-->
-                                                <Border x:Name="xMessageContent" 
-                                                        Grid.Row="0" Grid.Column="0"
-                                                        CornerRadius="25"
-                                                        MinHeight="20" MinWidth="10"
-                                                        MaxWidth="500">
-                                                    <!--Điều chỉnh màu nền trùng với trạng thái-->
-                                                    <Border.Style>
-                                                        <Style TargetType="{x:Type Border}">
-                                                            <Setter Property="Background" Value="{StaticResource MesseageSentColor}"/>
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                                    <Setter Property="Background" Value="{StaticResource MesseageReceiveColor}"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Border.Style>
-                                                    <TextBlock Text="{Binding Message}">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CMessageStyle}">
-                                                                <Setter Property="Foreground" Value="{StaticResource TextSentColor}"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ToggleButton x:Name="BTN_More"
+                                                                  Style="{StaticResource ToggleBtnMessageIconReact}"
+                                                                  Content="&#xf142;">
+                                                    </ToggleButton>
+                                                    <ToggleButton x:Name="BTN_React"
+                                                                  Style="{StaticResource ToggleBtnMessageIconReact}"
+                                                                  Content="&#xf118;">
+                                                    </ToggleButton>
+                                                    <Popup x:Name="POPUP_React"
+                                                           Placement="Top"
+                                                           StaysOpen="False"
+                                                           VerticalOffset="20"
+                                                           PopupAnimation="Slide"
+                                                           IsOpen="{Binding IsChecked,ElementName=BTN_React}"
+                                                           AllowsTransparency="True">
+                                                        <Popup.Style>
+                                                            <!--Sự kiện khi hover vào tag và popup-->
+                                                            <Style TargetType="{x:Type Popup}">
+                                                                <Setter Property="HorizontalOffset" Value="-30"/>
                                                                 <Style.Triggers>
                                                                     <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                                        <Setter Property="Foreground" Value="{StaticResource TextReceiveColor}"/>
+                                                                        <Setter Property="HorizontalOffset" Value="10"/>
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
                                                             </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-                                                </Border>
+                                                        </Popup.Style>
+                                                        <local:CReaction></local:CReaction>
+                                                    </Popup>
+                                                </StackPanel>
                                             </Grid>
                                         </StackPanel>
-                                        <!-- ========================== Thông kê reaction =========================== -->
+                                         <!-- ========================== Reaction tin nhắn ===========================-->
                                         <StackPanel x:Name="xStack_ReactionStatiscal" Grid.Row="1" Grid.Column="0"
                                                     Orientation="Horizontal" 
-                                                    Background="Aqua"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalAlignment="Left"
+                                                    FlowDirection="LeftToRight"
                                                     Margin="0,0,0,0">
                                             <!--<StackPanel.Style>
                                                 <Style TargetType="{x:Type StackPanel}">
@@ -233,78 +283,16 @@
                                             </local:CReactionStatiscal>
                                         </StackPanel>
                                     </Grid>
-                                    <!--===================== Thời gian trạng thái tin nhắn =======================-->
+                                    <!--====================== Thời gian trạng thái tin nhắn =========================-->
                                     <Grid x:Name="xGrid_InfoMessage" Grid.Row="1" Grid.Column="0">
-                                        <DockPanel LastChildFill="True"
-                                                   HorizontalAlignment="Stretch">
-                                            <DockPanel.Style>
-                                                <Style TargetType="{x:Type DockPanel}">
-                                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                            <Setter Property="FlowDirection" Value="RightToLeft"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </DockPanel.Style>
+                                        <DockPanel LastChildFill="True">
                                             <TextBlock Style="{StaticResource MessageTimeStyle}"
+                                                       Margin="0,0,70,0"
+                                                       HorizontalAlignment="Right"
                                                        Text="{Binding Time}">
                                             </TextBlock>
                                         </DockPanel>
                                     </Grid>
-                                </Grid>
-
-                                <!-- ========================= Hiển thị chức năng tin nhắn ========================= -->
-                                <Grid x:Name="xGrid_FunctionMessage">
-                                    <!--Tính năng chỉ Hover Grid mới hiện thị các button chức năng-->
-                                    <Grid.Style>
-                                        <Style TargetType="{x:Type Grid}">
-                                            <Setter Property="Visibility"    Value="Hidden"/>
-                                            <Setter Property="FlowDirection" Value="RightToLeft"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=IsMouseOver,
-                                                                 RelativeSource={RelativeSource
-                                                                 AncestorType={x:Type Border}}}"
-                                                                 Value="True">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Grid.Style>
-
-                                    <StackPanel Orientation="Horizontal">
-                                        <ToggleButton x:Name="BTN_More"
-                                                      Style="{StaticResource ToggleBtnMessageIconReact}"
-                                                      Content="&#xf142;">
-                                        </ToggleButton>
-                                        <ToggleButton x:Name="BTN_React"
-                                                      Style="{StaticResource ToggleBtnMessageIconReact}"
-                                                      Content="&#xf118;">
-                                        </ToggleButton>
-                                        <Popup x:Name="POPUP_React"
-                                               Placement="Top"
-                                               StaysOpen="False"
-                                               VerticalOffset="20"
-                                               PopupAnimation="Slide"
-                                               IsOpen="{Binding IsChecked,ElementName=BTN_React}"
-                                               AllowsTransparency="True">
-                                            <Popup.Style>
-                                                <!--Sự kiện khi hover vào tag và popup-->
-                                                <Style TargetType="{x:Type Popup}">
-                                                    <Setter Property="HorizontalOffset" Value="-30"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                            <Setter Property="HorizontalOffset" Value="10"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Popup.Style>
-                                            <local:CReaction></local:CReaction>
-                                        </Popup>
-                                    </StackPanel>
                                 </Grid>
                             </StackPanel>
                         </Border>

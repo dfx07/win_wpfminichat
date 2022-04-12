@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wpf_foxchat.Controls"
              mc:Ignorable="d" 
-             Height="50" Width="230">
+             Height="80" Width="250">
     <UserControl.Resources>
         <!--===============================  Giao diện Icon Reaction ===============================-->
         <Style x:Key="IconReact" TargetType="{x:Type Button}">
@@ -20,17 +20,60 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter Name="content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                              Margin="{TemplateBinding Padding}" 
-                                              RecognizesAccessKey="True" 
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            </ContentPresenter>
+                        <Border x:Name="xBorder_Icon">
+                            <Border.RenderTransform>
+                                <TranslateTransform X="0" Y="0"></TranslateTransform>
+                            </Border.RenderTransform>
+                            <Grid Margin="0,-50,0,-50">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="*" ></RowDefinition>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Grid.Column="0" Background="White" Opacity="0.01"></Grid>
+                                <Grid Name="xGrid_Content" Grid.Row="1" Grid.Column="0" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                      Margin="{TemplateBinding Padding}" 
+                                                      RecognizesAccessKey="True" 
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    </ContentPresenter>
+                                </Grid>
+
+                                <Grid Grid.Row="2" Grid.Column="0" Background="White" Opacity="0.01"></Grid>
+                            </Grid>
+
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Margin" Value="-9"></Setter>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="xBorder_Icon"
+                                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                             From="0" To="-10" Duration="0:0:1" 
+                                                             AutoReverse="False">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="xBorder_Icon"
+                                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                             From="-10" To="0" Duration="0:0:1" 
+                                                             AutoReverse="False">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background">
@@ -50,51 +93,49 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="6">
+    <Grid Margin="20">
         <Border CornerRadius="20"
                 BorderThickness="1"
                 BorderBrush="Wheat"
                 Background="Transparent">
             <Grid>
-                <Grid Margin="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="React_Like"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="React_Like"
                             Click="Btn_React_Click"
                             Grid.Column="0"
                             Style="{StaticResource IconReact}" 
                             Background="{StaticResource Like_React}">
-                    </Button>
-                    <Button x:Name="React_Haha" 
+                </Button>
+                <Button x:Name="React_Haha" 
                             Click="Btn_React_Click"
                             Grid.Column="1"
                             Style="{StaticResource IconReact}"
                             Background="{StaticResource Haha_React}">
-                    </Button>
-                    <Button x:Name="React_Love" 
+                </Button>
+                <Button x:Name="React_Love" 
                             Click="Btn_React_Click"
                             Grid.Column="2"
                             Style="{StaticResource IconReact}"
                             Background="{StaticResource Love_React}">
-                    </Button>
-                    <Button x:Name="React_Wow" 
+                </Button>
+                <Button x:Name="React_Wow" 
                             Click="Btn_React_Click"
                             Grid.Column="3"
                             Style="{StaticResource IconReact}"
                             Background="{StaticResource Wow_React}">
-                    </Button>
-                    <Button x:Name="React_Sad" 
+                </Button>
+                <Button x:Name="React_Sad" 
                             Click="Btn_React_Click"
                             Grid.Column="4"
                             Style="{StaticResource IconReact}"
                             Background="{StaticResource Sad_React}">
-                    </Button>
-                </Grid>
+                </Button>
             </Grid>
         </Border>
     </Grid>
