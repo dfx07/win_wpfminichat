@@ -235,27 +235,18 @@
                                                                   Style="{StaticResource ToggleBtnMessageIconReact}"
                                                                   Content="&#xf118;">
                                                     </ToggleButton>
-                                                    <Popup x:Name="POPUP_React"
+                                                </StackPanel>
+                                                <Popup x:Name="POPUP_React"
+                                                           FlowDirection="LeftToRight"
                                                            Placement="Top"
+                                                           HorizontalOffset="-90"
+                                                           VerticalOffset="30"
+                                                           SnapsToDevicePixels="True"
                                                            StaysOpen="False"
-                                                           VerticalOffset="20"
-                                                           PopupAnimation="Slide"
                                                            IsOpen="{Binding IsChecked,ElementName=BTN_React}"
                                                            AllowsTransparency="True">
-                                                        <Popup.Style>
-                                                            <!--Sự kiện khi hover vào tag và popup-->
-                                                            <Style TargetType="{x:Type Popup}">
-                                                                <Setter Property="HorizontalOffset" Value="-30"/>
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Status}" Value="{x:Static com:MessageStatus.Received}">
-                                                                        <Setter Property="HorizontalOffset" Value="10"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Popup.Style>
-                                                        <local:CReaction></local:CReaction>
-                                                    </Popup>
-                                                </StackPanel>
+                                                    <local:CReaction></local:CReaction>
+                                                </Popup>
                                             </Grid>
                                         </StackPanel>
                                          <!-- ========================== Reaction tin nhắn ===========================-->

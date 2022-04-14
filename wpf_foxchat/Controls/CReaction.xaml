@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:wpf_foxchat.Controls"
              mc:Ignorable="d" 
-             Height="80" Width="250">
+             Height="90" Width="250">
     <UserControl.Resources>
         <!--===============================  Giao diện Icon Reaction ===============================-->
         <Style x:Key="IconReact" TargetType="{x:Type Button}">
@@ -51,7 +51,7 @@
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="xBorder_Icon"
                                                              Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
-                                                             From="0" To="-10" Duration="0:0:1" 
+                                                             From="0" To="-10" Duration="0:0:2" 
                                                              AutoReverse="False">
                                                 <DoubleAnimation.EasingFunction>
                                                     <ElasticEase EasingMode="EaseOut"/>
@@ -65,7 +65,7 @@
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="xBorder_Icon"
                                                              Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
-                                                             From="-10" To="0" Duration="0:0:1" 
+                                                             To="0" Duration="0:0:2" 
                                                              AutoReverse="False">
                                                 <DoubleAnimation.EasingFunction>
                                                     <ElasticEase EasingMode="EaseOut"/>
@@ -93,11 +93,44 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="20">
-        <Border CornerRadius="20"
+    <Grid Margin="25">
+        <Border x:Name="xBoder_Reaction"
+                CornerRadius="20"
                 BorderThickness="1"
                 BorderBrush="Wheat"
                 Background="Transparent">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform x:Name="ActionTranslate" X="0" Y="0"/>
+                    <ScaleTransform x:Name="ActionScale" CenterX="125" CenterY="50" ScaleX="1" ScaleY="1" />
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ActionTranslate"
+                                             Storyboard.TargetProperty="Y"
+                                             From="20" To="0" Duration="0:0:2"
+                                             AutoReverse="False">
+                                <DoubleAnimation.EasingFunction>
+                                    <ElasticEase EasingMode="EaseOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetName="ActionScale"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             From="0" To="1" Duration="0:0:0.2"
+                                             AutoReverse="False">
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetName="ActionScale"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             From="0" To="1" Duration="0:0:0.2"
+                                             AutoReverse="False">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
